@@ -21,7 +21,7 @@
                 // 资源预加载 
                 function preload() {
                     game.load.image('pic', 'images/amo.gif');
-                    game.load.audio('music', 'audio/music.mp3');
+                    //game.load.audio('music', 'audio/music.mp3');
                 }
                 
                 // 初始化 
@@ -36,7 +36,7 @@
                     pic = game.add.sprite(30, 30, 'pic');
                     pic.anchor.setTo(0.5, 0.5);
 
-                    game.input.onDown.add(changeVolume, this);
+                    //game.input.onDown.add(changeVolume, this);
                 }
                 
                 // 改变音量 
@@ -50,8 +50,7 @@
 
                 // 每帧更新 
                 function update() {
-                    pic.rotation += 0.01;
-                    //game.physics.moveToPointer(pic, 300, game.input.activePointer);
+                    pic.rotation += 0.02;
                 }
 
                 // 渲染
