@@ -1109,17 +1109,10 @@ a.article-title:hover {
   color: #ddd;
 }
 #footer {
-<<<<<<< HEAD
-  background: #262a30;
-  padding: 50px 0;
-  border-top: 1px solid #ddd;
-  color: #999;
-=======
   background: #736d60;
   padding: 15px 0;
   border-top: 1px solid #ddd;
   color: #ccc;
->>>>>>> 4b3f4165dc4e10da1f528fd1c3c8808148cdf0b8
 }
 #footer a {
   color: #258fb8;
