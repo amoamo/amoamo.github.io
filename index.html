@@ -62,6 +62,413 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cross_domain" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/07/01/cross_domain/" class="article-date">
+  <time datetime="2014-07-01T06:50:41.000Z" itemprop="datePublished">Jul 1 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/07/01/cross_domain/">跨域问题及解决方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>说到javascript跨越问题，首页必然需要引入一个概念。那就是为什么会存在跨域问题？又该如何解决呢？</p>
+<h3 id="一、同源策略（same-origin_policy）">一、同源策略（same-origin policy）</h3>
+<p>在web应用安全模型里同源策略是一个很重要的概念。它是由Netscape提出的一个著名的安全策略，现在所有的可支持javascript的浏览器都会使用这个策略。</p>
+<p>同源策略，又称为单源策略，它限制了一个源（origin）中加载文本或脚本与来自其它源（origin）中资源的交互方式。</p>
+<p>Mozilla认为两个页面它们拥有相同的协议、端口（如果指明）、主机名，那么这两个页面就拥有相同的源。</p>
+<p>下面来看一个例子，假设有一个url地址为: <a href="http://www.a.com/page/a.html的同源检测示例：" target="_blank" rel="external">http://www.a.com/page/a.html的同源检测示例：</a></p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th style="text-align:center">非IE浏览器结果</th>
+<th style="text-align:center">IE浏览器结果</th>
+<th style="text-align:center">原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.a.com/page/b.html" target="_blank" rel="external">http://www.a.com/page/b.html</a></td>
+<td style="text-align:center">成功</td>
+<td style="text-align:center">成功</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td><a href="http://www.a.com/app/c.html" target="_blank" rel="external">http://www.a.com/app/c.html</a></td>
+<td style="text-align:center">成功</td>
+<td style="text-align:center">成功</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td><a href="http://username:password@www.a.com/page/b.html" target="_blank" rel="external">http://username:password@www.a.com/page/b.html</a></td>
+<td style="text-align:center">成功</td>
+<td style="text-align:center">成功</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td><a href="http://www.a.com:81/page/d.html" target="_blank" rel="external">http://www.a.com:81/page/d.html</a></td>
+<td style="text-align:center">失败</td>
+<td style="text-align:center">成功</td>
+<td style="text-align:center">端口不同</td>
+</tr>
+<tr>
+<td><a href="https://www.a.com/page/e.html" target="_blank" rel="external">https://www.a.com/page/e.html</a></td>
+<td style="text-align:center">失败</td>
+<td style="text-align:center">失败</td>
+<td style="text-align:center">协议不同</td>
+</tr>
+<tr>
+<td><a href="http://www.b.a.com/page/c.html" target="_blank" rel="external">http://www.b.a.com/page/c.html</a></td>
+<td style="text-align:center">失败</td>
+<td style="text-align:center">失败</td>
+<td style="text-align:center">主机不同</td>
+</tr>
+<tr>
+<td><a href="http://www.c.com/page/c.html" target="_blank" rel="external">http://www.c.com/page/c.html</a></td>
+<td style="text-align:center">失败</td>
+<td style="text-align:center">失败</td>
+<td style="text-align:center">主域不同</td>
+</tr>
+</tbody>
+</table>
+<p>从上表不难看出，对于IE来说在处理同源策略上有一些不同：</p>
+<p><strong>1、端口:IE未将端口号加入到同源策略的组成部分之中，因此 <a href="http://a.com:81/index.html" target="_blank" rel="external">http://a.com:81/index.html</a> 和<a href="http://a.com/index.html" target="_blank" rel="external">http://a.com/index.html</a>  属于同源并且不受任何限制。</strong></p>
+<p><strong>2、授信范围（Trust Zones）：两个相互之间高度互信的域名，如公司域名（corporate domains），不遵守同源策略的限制。</strong></p>
+<p>除这些指定的URL之外，也常常会有来自about:blank，javascript:和data:URLs中的内容，它们遵循源继承的原则，继承将其载入的文档所指定的源，因为它们的URL本身未指定任何关于自身源的信息。</p>
+<h3 id="二、Javascript跨域解决方案">二、Javascript跨域解决方案</h3>
+<h4 id="1、设置Domain">1、设置Domain</h4>
+<p>页面可以改变本身的源，但会受到一些限制。脚本可以设置document.domain 的值为当前域的一个后缀</p>
+<p>在同源策略中有一个例外，脚本可以设置 document.domain 的值为当前域的一个后缀，如果这样做的话，短的域将作为后续同源检测的依据。例如，假设在 <a href="http://b.a.com/page/a.html" target="_blank" rel="external">http://b.a.com/page/a.html</a> 中的一个脚本执行了下列语句：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>document.domain = <span class="string">"a.com"</span>
+</pre></td></tr></table></figure>
+
+<p>这条语句执行之后，页面将会成功地通过对 <a href="http://a.com/page/a.html" target="_blank" rel="external">http://a.com/page/a.html</a> 的同源检测。而同理，a.com 不能设置 document.domain 为 b.com.</p>
+<p>浏览器单独保存端口号。任何的赋值操作，包括document.domain = documen.domain都会以null值覆盖掉原来的端口号。因此a.com:8080页面的脚本不能仅通过设置document.domain = “a.com”就能与company.com通信。赋值时必须带上端口号，以确保端口号不会为null。</p>
+<p><strong>注意：使用document.domain来安全是让子域访问其父域，需要同时将子域和父域的document.domain设置为相同的值。必须要这么做，即使是简单的将父域设置为其原来的值。没有这么做的话可能导致授权错误。</strong></p>
+<ul>
+<li><p>举个例子</p>
+<p>  a.taobao.com嵌入一个b.taobao.com的页面，并且需要做高度自适应，那么可以这么来做：</p>
+<ul>
+<li><p>在a页面中设置domain并定义autoHeight方法（用处为改变iframe的高度）</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>document.domain = <span class="string">"taobao.com"</span>
+</pre></td></tr></table></figure>
+</li>
+<li><p>在b页面,页面加载之后或者所有涉及到高度变化的事件中，调用a页面的方法：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>function <span class="function"><span class="title">fixHeight</span></span>(){
+	document.domain = <span class="string">'taobao.com'</span>;
+	var oHeight = document.documentElement.scrollHeight;
+	window.parent.autoHeight(oHeight); //调用a页面的autoHeight方法，在该方法中去改变iframe的高度
+}
+</pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2、使用代理页">2、使用代理页</h4>
+<p>如果主域名也不同该怎么做呢？如：a.com/index.html和b.com/iframe.html</p>
+<ul>
+<li><p>有一种办法是采用<strong>代理页</strong>的方式</p>
+<p>  即在b.com下建立一个b.com/proxy.html代理页面，还是以高度自适应为例来说明：</p>
+<p>  a页面iframe该proxy页面，并将高度以hash值的方式填到这个嵌入proxy.html的iframe的src中去<br>  在proxy.html中去拿到这个hash中的高度值，并去操作父父层页面的高度<br>  <img src="/css/images/iframe.png" alt="iframe cross domain"></p>
+<p>  代码如下：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre></td><td class="code"><pre><span class="comment">#set_height.js</span>
+(function(win, doc){
+	win.onload = <span class="function"><span class="title">function</span></span> () {
+        var url = <span class="string">"http://a.com/proxy.html"</span>;
+       	var ifmProxy = doc.getElementById(<span class="string">"ifmProxy"</span>); //iframe target
+        var hs; //height
+        var hsLastTime = <span class="number">0</span>; //height last time
+        var startTime = <span class="number">0</span>; //count
+        var loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span> () {
+            <span class="keyword">set</span>Height();
+        }, <span class="number">500</span>);
+        function <span class="function"><span class="title">setHeight</span></span>() {
+            startTime++;
+            //get current height
+            hs = doc.documentElement.scrollHeight;
+            //update the hs height
+            <span class="keyword">if</span>(hs !== hsLastTime) {
+            	ifmProxy.src = url + <span class="string">"#"</span> + hs;
+                hsLastTime = hs;
+            }
+            //clearCount and restart
+         	<span class="keyword">if</span>(startTime &gt;= <span class="number">500</span>) {
+         	    clearInterval(loadIframeStart);
+               	startTime = <span class="number">0</span>;
+               	loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span>() {
+                    <span class="keyword">set</span>Height();
+               	}, <span class="number">500</span>)                                                                            
+            }    
+        }
+    };
+})(window, document);
+</pre></td></tr></table></figure><br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre></td><td class="code"><pre><span class="comment">#proxy.html</span>
+&lt;script&gt;
+    try{
+        var ifmAnalyst = parent.parent.document.getElementById(<span class="string">'isvIframeCon'</span>); //目标iframe
+        var hs; //获取的高度
+        var hsLastTime = <span class="number">0</span>; //上一次获取到的高度
+        var startTime = <span class="number">0</span>; //计时器初始值
+        var loadIframeStart = window.setInterval( <span class="function"><span class="title">function</span></span> () {
+            updateHeight();
+        }, <span class="number">500</span>);
+        function <span class="function"><span class="title">updateHeight</span></span>() {
+            startTime++;
+            //获取当前的高度值
+            hs = window.location.hash;
+            //当高度改变则去更新iframe的高度同时将hsLastTime更新
+            <span class="keyword">if</span>(hs !== hsLastTime) {
+                ifmAnalyst.style.height = hs.split(<span class="string">"#"</span>)[<span class="number">1</span>] + <span class="string">"px"</span>;
+                hsLastTime = hs;
+            }
+            //当达到一定的次数，清理一次计时器，并重新开始监听
+            <span class="keyword">if</span>(startTime &gt;= <span class="number">500</span>) {
+                clearInterval(loadIframeStart);
+                startTime = <span class="number">0</span>;
+                loadIframeStart = window.setInterval( <span class="function"><span class="title">function</span></span>() {
+                    updateHeight();
+                }, <span class="number">500</span>)
+            }                                                                                      
+        }
+    } catch(ex) {
+    }
+&lt;/script&gt;
+</pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="3、JSONP（创建script标签形式）">3、JSONP（创建script标签形式）</h4>
+<p>所谓JSONP的方式简单来说就是利用script标签不受同源策略的限制这一特性。</p>
+<p>我们通过script标签的形式把想要请求的地址作为src传入，从而获得相应的文件或者JSON数据。</p>
+<p>a.com下的数据fn({“name”: “amo”});</p>
+<p>b.com下的函数function fn(res){ console.log(res.name); }</p>
+<p>下面我们来看下具体来写应该怎样做：</p>
+<ul>
+<li><p>在A.com网站下：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre>function createJs(sUrl){
+    var oScript = document.createElement(<span class="string">'script'</span>);
+    oScript.type = <span class="string">'text/javascript'</span>;
+    oScript.src = sUrl;
+    document.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(oScript);
+}
+createJs(<span class="string">'jsonp.js?callback=fn'</span>);
+function fn(rs) {
+    console.log(rs);
+}
+</pre></td></tr></table></figure>
+</li>
+<li><p>在B.com的jsonp.js通过拿到这个callback参数，并把它填充到具体的数据中，格式如下</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>fn({<span class="string">"name"</span>, <span class="string">"amo"</span>});
+</pre></td></tr></table></figure>
+
+<p>  这样就相当于页面上是这样的</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>&lt;script&gt;
+	fn({<span class="string">"name"</span>: <span class="string">"amo"</span>});//fn这个函数的调用
+&lt;/script&gt;
+</pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>当然这里只是一个思路的过程，实际JSONP的过程要比这复杂的多，比如说是否onload、回调状态码、格式的校验等。</p>
+<h4 id="4、postMessage方式">4、postMessage方式</h4>
+<p>在HTML5中，提出了工作线程的概念（web workers）。Web Workers 允许开发人员编写能够长时间运行而不被用户所中断的后台程序，去执行事务或者逻辑，并同时保证页面对用户的及时响应。web worker一旦被创建，就可以通过postMessage 向任务池发送任务请求，执行完之后再通过 postMessage 返回消息给创建者指定的事件处理程序 ( 通过 onmessage 进行捕获 )。Web Workers 进程能够在不影响用户界面的情况下处理任务，并且，它还可以使用 XMLHttpRequest 来处理 I/O，但通常，后台进程（包括 Web Workers 进程）不能对 DOM 进行操作。如果希望后台程序处理的结果能够改变 DOM，只能通过返回消息给创建者的回调函数进行处理。 </p>
+<p>那么利用这个特性，我们怎么来实现跨域之间的通信呢？还是以高度自适应为例。</p>
+<p>a.com/parent.html 嵌入 b.com/child.html该如何去获取到b下面的页面高度呢？</p>
+<p>在child.html中引入如下代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="code"><pre>(function(win, doc){
+    win.onload = <span class="function"><span class="title">function</span></span> () {
+        var hs; //height
+        var hsLastTime = <span class="number">0</span>; //height last time
+        var startTime = <span class="number">0</span>; //count
+        var loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span> () {
+            <span class="keyword">set</span>Height();
+        }, <span class="number">500</span>);
+        function <span class="function"><span class="title">setHeight</span></span>() {
+            startTime++;
+            //get current height
+            hs = doc.documentElement.offsetHeight;
+            //update the hs height
+            <span class="keyword">if</span>(hs !== hsLastTime) {
+                window.parent.postMessage({h: hs}, <span class="string">'*'</span>); //指定是向父容器postmessage
+                hsLastTime = hs;
+            }
+            //clearCount and restart
+            <span class="keyword">if</span>(startTime &gt;= <span class="number">500</span>) {
+                clearInterval(loadIframeStart);
+                startTime = <span class="number">0</span>;
+                loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span>() {
+                    <span class="keyword">set</span>Height();
+                }, <span class="number">500</span>)
+            }
+        }
+    };
+})(window, document);
+</pre></td></tr></table></figure>
+
+<p>在parent.html加载完iframe之后引入如下代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>window.addEventListener(<span class="string">"message"</span>, function(data) {
+    var ifmAnalyst = document.getElementById(<span class="string">'isvIframeCon'</span>)，//目标iframe
+        ifmHeight = data.data.h;
+    //data.data.h即为高度
+    ifmAnalyst.style.height = ifmHeight + <span class="string">"px"</span>;
+});
+</pre></td></tr></table></figure>
+
+<p><strong>这种方法虽然很方便，但是是H5的特性，所以在使用前先考虑是否需要兼容低版本浏览器</strong></p>
+<h4 id="5、服务器代理">5、服务器代理</h4>
+<h4 id="6、flash方式">6、flash方式</h4>
+<p>后两种方式，这里不做介绍。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://amoamo.github.io/2014/07/01/cross_domain/" data-id="ykqt642vssa8l5q6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cross-domain/">cross domain</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hexo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/06/18/hexo/" class="article-date">
@@ -178,7 +585,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="fe66a5u3coltf76q" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="qm7phjshfmmvezly" class="article-share-link">Share</a>
       
       
     </footer>
@@ -194,16 +601,37 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/cross-domain/" style="font-size: NaNpx;">cross domain</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -213,6 +641,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/07/01/cross_domain/">跨域问题及解决方案</a>
+          </li>
         
           <li>
             <a href="/2014/06/18/hexo/">github pages &amp; hexo建站指南</a>
