@@ -625,7 +625,7 @@ a.article-title:hover {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: auto;
+  margin: 0;
 }
 .article-entry iframe {
   border: none;
@@ -1128,7 +1128,7 @@ a.article-title:hover {
 .article-entry pre,
 .article-entry .highlight {
   background: #2d2d2d;
-  margin: 0 -20px;
+  margin: 0 0;
   padding: 15px 20px;
   border-style: solid;
   border-color: #ddd;

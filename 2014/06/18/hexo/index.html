@@ -163,9 +163,13 @@ git
 </pre></td><td class="code"><pre>	The authenticity of host <span class="string">'github.com (207.97.227.239)'</span> can<span class="string">'t be established.  
 	RSA key fingerprint is   
 	Are you sure you want to continue connecting (yes/no)?</span>
-</pre></td></tr></table></figure><br>  输入yes<br>  然后会看到：<pre><code>  <span class="tag">&lt;<span class="title">hexoescape</span>&gt;</span>4<span class="tag">&lt;/<span class="title">hexoescape</span>&gt;</span>
-</code></pre>  至此，已经可以通过ssh连接到github，配置名称和邮箱：<pre><code>  <span class="tag">&lt;<span class="title">hexoescape</span>&gt;</span>5<span class="tag">&lt;/<span class="title">hexoescape</span>&gt;</span>
-</code></pre><h3 id="4、使用github_pages建立博客">4、使用github pages建立博客</h3>
+</pre></td></tr></table></figure><br>  输入yes<br>  然后会看到：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>	Hi &lt;em&gt;username&lt;/em&gt;! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span>
+</pre></td></tr></table></figure><br>  至此，已经可以通过ssh连接到github，配置名称和邮箱：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>	$ git config --global user.name <span class="string">"你的名字"</span>  
+	$ git config --global user.email <span class="string">"your_email@youremail.com"</span>
+</pre></td></tr></table></figure><h3 id="4、使用github_pages建立博客">4、使用github pages建立博客</h3>
   <a href="https://pages.github.com/" target="_blank" rel="external">官网简易教程</a><h3 id="5、hexo构建博客">5、hexo构建博客</h3>
 </li>
 <li>Node和Git都安装好了之后，安装hexo  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
@@ -225,13 +229,27 @@ git
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="fe66a5u3coltf76q" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="mwy2nt428jewfz4y" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2014/07/01/cross_domain/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          跨域问题及解决方案
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
@@ -240,16 +258,37 @@ git
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/cross-domain/" style="font-size: NaNpx;">cross domain</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -259,6 +298,22 @@ git
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/07/10/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/08/less/">less</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/04/console/">console使用小技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/01/cross_domain/">跨域问题及解决方案</a>
+          </li>
         
           <li>
             <a href="/2014/06/18/hexo/">github pages &amp; hexo建站指南</a>
