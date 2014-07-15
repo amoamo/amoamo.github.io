@@ -62,6 +62,653 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-less" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/07/15/less/" class="article-date">
+  <time datetime="2014-07-15T09:34:04.000Z" itemprop="datePublished">Jul 15 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/07/15/less/">less入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Less 是一个Css 预编译器,意思指的是它可以扩展Css语言,添加功能如允许变量(variables),混合(mixins),函数(functions) 和许多其他的技术，让你的Css更具维护性，主题性，扩展性。<br>Less包含了一套自定义的语法及一个解析器，用户可以通过这些语法来编写less文件，然后调用解析器来生成相应的css文件。简单来说，less其实就是在现有css语法的基础上为它加入了程序式语言的特性。</p>
+<p>Less 可运行在 Node 环境,浏览器环境和Rhino环境.同时也有3种可选工具供你编译文件和监视任何改变。</p>
+<p><a href="http://lesscss.org/" target="_blank" rel="external">官网</a><br><a href="http://www.lesscss.net/" target="_blank" rel="external">中文网址</a></p>
+<h3 id="一、安装">一、安装</h3>
+<h4 id="1、命令行下使用">1、命令行下使用</h4>
+<p>Less可以通过npm在命令行上使用，作为一个脚本文件浏览器或用于广泛的第三方工具下载。</p>
+<p>因为我的电脑已经安装了node环境，所以可以直接通过npm包安装的方式来安装less。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>npm install -g less
+</pre></td></tr></table></figure>
+
+<p>完成安装之后，便可以通过lessc命令来编译less文件了。如下例：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="at_rule">@<span class="keyword">color:</span> #ccc</span>;
+
+<span class="tag">body</span> <span class="rules">{
+    <span class="rule"><span class="attribute">color</span>:<span class="value"> @color</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>编译该文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>lessc test.less &gt; test.css
+</pre></td></tr></table></figure>
+
+<p>便可以得到test.css文件如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="tag">body</span> <span class="rules">{
+  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#ccc</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>当然lessc后也可以跟很多的参数，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>//-x表示压缩
+lessc -x test.less &gt; test.css
+</pre></td></tr></table></figure>
+
+<p>更多命令可以参考 —help或者参考<a href="http://lesscss.org/usage/" target="_blank" rel="external">官网</a></p>
+<h4 id="2、客户端使用">2、客户端使用</h4>
+<p>在浏览器中使用less.js开发是很好的，但不推荐用于生产环境中。</p>
+<p><strong>浏览器端使用是在使用LESS开发时最直观的一种方式。如果是在生产环境中，尤其是对性能要求比较高的场合，建议使用node或者其它第三方工具先编译成CSS再上线使用。</strong></p>
+<p>下面看如果直接在客户端来使用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="comment">&lt;!-- 目标样式表 --&gt;</span>
+<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet/less"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"test.less"</span> /&gt;</span>
+<span class="comment">&lt;!-- less文件 --&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"less.min.js"</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>这样当在浏览器中访问该页面时，less.min.js便会编译test.less并在页面head中插入相应编译后的css样式</p>
+<p><strong>有两点需要特别注意:</strong></p>
+<ul>
+<li>确保包涵.less样式表在less.js脚本之前</li>
+<li>当你引入多个.less样式表时，它们都是独立编译的。所以，在每个文件中定义的变量、混合、命名空间都不会被其它的文件共享。</li>
+</ul>
+<h4 id="3、在引入了GruntJs的项目中使用">3、在引入了GruntJs的项目中使用</h4>
+<p>参见<a href="https://www.npmjs.org/package/grunt-contrib-less" target="_blank" rel="external">grunt-contrib-less</a></p>
+<h3 id="二、语法">二、语法</h3>
+<h4 id="1、变量">1、变量</h4>
+<p>less允许开发者自定义变量，这样做有什么好处呢？如下例：</p>
+<p>less:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="variable">@artical</span>-<span class="keyword">color</span>: #fff;
+<span class="variable">@title</span>-<span class="keyword">color</span>: #ccc;
+
+.con {
+    .con-title {
+        <span class="keyword">color</span>: <span class="variable">@title</span>-<span class="keyword">color</span>;
+    }
+    .con-artical {
+        <span class="keyword">color</span>: <span class="variable">@artical</span>-<span class="keyword">color</span>;
+    }
+}
+</pre></td></tr></table></figure>
+
+<p>css：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="class">.con</span> <span class="class">.con-title</span> <span class="rules">{
+    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#ccc</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.con</span> <span class="class">.con-artical</span> <span class="rules">{
+    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>不难看到，通过这种方式，可以方便对变量进行统一的管理，可以抽取公共的属性在全局进行定义，一旦涉及到修改，只需修改变量即可。此外，也可以利用这种特性，来定义主题。</p>
+<p>在编程中既然有变量，那么就必定涉及到一个概念作用域。下面来看下在less中变量的作用域是怎样的。</p>
+<p>less:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>@<span class="keyword">color</span>: <span class="preprocessor">#fff;</span>
+.con {
+    <span class="keyword">color</span>: @<span class="keyword">color</span>;
+    @<span class="keyword">color</span>: <span class="preprocessor">#000;</span>
+    .con-title {
+        background-<span class="keyword">color</span>: @<span class="keyword">color</span>;
+    }
+}
+</pre></td></tr></table></figure>
+
+<p>css:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="class">.con</span> <span class="rules">{
+    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.con</span> <span class="class">.con-title</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<h4 id="2、mixins">2、mixins</h4>
+<p>在less中，mixins指在一个class钟混入另一个已经定义的class。</p>
+<p>less:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="comment">//定义一个样式</span>
+<span class="class">.btn</span> {
+    <span class="attribute">background-color</span><span class="value">: <span class="hexcolor">#b72b25</span>;</span>
+    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#fff</span>;</span>
+}
+<span class="comment">//在其他的选择器中使用</span>
+<span class="class">.con-btns</span> {
+    <span class="class">.btn</span>;
+}
+</pre></td></tr></table></figure>
+
+<p>css:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="class">.con-btns</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#b72b25</span></span></span>;
+    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>mixins其实就是一种规则的复用。除此之外，mixins还允许混入参数。</p>
+<p>less:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="comment">//定义一个样式</span>
+.btn(@<span class="keyword">color</span>) {
+    background-<span class="keyword">color</span>: @<span class="keyword">color</span>;
+}
+<span class="comment">//在其他的选择器中使用</span>
+.con-enable=btn {
+    .btn(<span class="preprocessor">#b72b25);</span>
+}
+.con-disable=btn {
+    .btn(<span class="preprocessor">#ddd);</span>
+}
+</pre></td></tr></table></figure>
+
+<p>css:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="class">.con-enable-btn</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#b72b25</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.con-disable-btn</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#ddd</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>mixins还支持传入默认参数，如下：</p>
+<p>less:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>.border(<span class="variable">@w</span><span class="symbol">:</span><span class="number">1</span>px,<span class="variable">@t</span><span class="symbol">:solid</span>,<span class="variable">@c</span><span class="symbol">:</span><span class="comment">#ccc) {</span>
+    <span class="symbol">border:</span> <span class="variable">@arguments</span>;
+}
+.detail-info {
+    .border(<span class="number">2</span>px,dashed,<span class="comment">#d8d8d8);</span>
+}
+</pre></td></tr></table></figure><br>css:<br><figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="class">.detail-info</span> <span class="rules">{
+     <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">2</span>px dashed <span class="hexcolor">#d8d8d8</span></span></span>;
+ <span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>在项目中为了防止选择器重名的问题，可以利用命名空间：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="preprocessor">#amo {</span>
+    <span class="preprocessor">.head</span> {}
+}
+<span class="preprocessor">.page</span>-head {
+    <span class="preprocessor">#amo &gt; .head;</span>
+}
+</pre></td></tr></table></figure>
+
+<h4 id="3、嵌套">3、嵌套</h4>
+<p>嵌套规则很简单，如html本身的dom层次。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con-title"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con-artical"</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"javascript:void(0)"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>那么less可以这样编写：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre>.con {
+    <span class="keyword">...</span>
+    .con-title {
+        <span class="keyword">...</span>
+    }
+    .con-artical {
+        <span class="keyword">...</span>
+        a {
+            <span class="keyword">...</span>
+            &:hover { //&表示该元素如果没有&表示后代元素
+                <span class="keyword">...</span>
+            }
+        }
+    }
+}
+</pre></td></tr></table></figure>
+
+<h4 id="4、运算和函数">4、运算和函数</h4>
+<p>以按钮的hover为例：</p>
+<p>less:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="at_rule">@<span class="keyword">color:</span> #<span class="number">80</span>e619</span>;
+
+<span class="class">.btn</span>(<span class="at_rule">@<span class="keyword">color)</span> </span>{
+    <span class="tag">background-color</span>: <span class="at_rule">@<span class="keyword">color;</span>
+}
+
+.enable-btn </span>{
+    <span class="class">.btn</span>(<span class="at_rule">@<span class="keyword">color);</span>
+    &:hover </span>{ 
+        <span class="class">.btn</span>(<span class="tag">darken</span>(<span class="at_rule">@<span class="keyword">color,</span> <span class="number">20</span>%))</span>;
+    }
+}
+</pre></td></tr></table></figure><br>css:<br><figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="class">.enable-btn</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#80e619</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.enable-btn</span><span class="pseudo">:hover</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#4d8a0f</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>这样很简单的就实现了鼠标hover到按钮上背景色变暗的效果。</p>
+<p>更多功能可以参考<a href="http://lesscss.org/functions/#functions-overview" target="_blank" rel="external">function api</a></p>
+<h4 id="4、注释">4、注释</h4>
+<p>可采用//注释或者/<em>注释</em>/，但是在编译生成css若想保留注释必须采用css标准注释/<em>..</em>/。</p>
+<h4 id="5、css3参考用例">5、css3参考用例</h4>
+<ul>
+<li>圆角</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="built_in">.</span>border<span class="attribute">-radius</span> (@radius: <span class="number">5</span>px) {
+    <span class="attribute">-webkit</span><span class="attribute">-border</span><span class="attribute">-radius</span>: @radius;
+	<span class="attribute">-moz</span><span class="attribute">-border</span><span class="attribute">-radius</span>: @radius;
+	border<span class="attribute">-radius</span>: @radius;
+}
+
+<span class="built_in">.</span>test<span class="attribute">-div</span> {
+    <span class="built_in">.</span>border<span class="attribute">-radius</span>(<span class="number">20</span>px);
+}
+</pre></td></tr></table></figure>
+
+<ul>
+<li>四个角可自由定制角度</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>.border-radius-custom (<span class="variable">@topleft</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@topright</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@bottomleft</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@bottomright</span><span class="symbol">:</span> <span class="number">5</span>px) {
+    -webkit-border-<span class="symbol">radius:</span> <span class="variable">@topleft</span> <span class="variable">@topright</span> <span class="variable">@bottomright</span> <span class="variable">@bottomleft</span>;
+    -moz-border-<span class="symbol">radius:</span> <span class="variable">@topleft</span> <span class="variable">@topright</span> <span class="variable">@bottomright</span> <span class="variable">@bottomleft</span>;
+    border-<span class="symbol">radius:</span> <span class="variable">@topleft</span> <span class="variable">@topright</span> <span class="variable">@bottomright</span> <span class="variable">@bottomleft</span>;
+}
+
+.test-div {
+    .border-radius-custom(<span class="number">20</span>px, <span class="number">20</span>px, 0px, 0px);
+}
+</pre></td></tr></table></figure>
+
+<ul>
+<li>阴影</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>.box-shadow (<span class="variable">@x</span><span class="symbol">:</span> 0px, <span class="variable">@y</span><span class="symbol">:</span> <span class="number">3</span>px, <span class="variable">@blur</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@alpha</span><span class="symbol">:</span> <span class="number">0</span>.<span class="number">5</span>) {
+-webkit-box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span class="variable">@y</span> <span class="variable">@blur</span> rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="variable">@alpha</span>);
+-moz-box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span class="variable">@y</span> <span class="variable">@blur</span> rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="variable">@alpha</span>);
+box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span class="variable">@y</span> <span class="variable">@blur</span> rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="variable">@alpha</span>);
+}
+
+.test-div {
+.box-shadow(<span class="number">5</span>px, <span class="number">5</span>px, <span class="number">6</span>px, <span class="number">0</span>.<span class="number">3</span>);
+}
+</pre></td></tr></table></figure>
+
+<ul>
+<li>元素过渡效果</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>.transition (@prop: all, @time: 1s, @ease: linear) {
+    -<span class="ruby">webkit-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;
+</span>    -<span class="ruby">moz-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;
+</span>    -<span class="ruby">o-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;
+</span>    -<span class="ruby">ms-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;
+</span>    transition: @prop @time @ease;
+}
+
+.test-div {
+    .transition(all, 0.5s, ease-in);
+}
+</pre></td></tr></table></figure>
+
+<ul>
+<li>旋转</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>.transform (<span class="variable">@rotate</span>: <span class="number">90</span>deg, <span class="variable">@scale</span>: <span class="number">1</span>, <span class="variable">@skew</span>: <span class="number">1</span>deg, <span class="variable">@translate</span>: <span class="number">10</span>px) {
+    -webkit-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);
+    -moz-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);
+    -o-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);
+    -ms-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);
+    transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);
+}
+
+.test-div {
+    .transform(<span class="number">5</span>deg, <span class="number">0.5</span>, <span class="number">1</span>deg, <span class="number">0</span>px);
+}
+</pre></td></tr></table></figure>
+
+<ul>
+<li>颜色渐变</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="comment">/*线性渐变*/</span>
+.gradient (<span class="variable">@origin</span>: left, <span class="variable">@start</span>: #ffffff, <span class="variable">@stop</span>: #<span class="number">000000</span>) {
+    background-<span class="keyword">color</span>: <span class="variable">@start</span>;
+    background-<span class="keyword">image</span>: -webkit-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);
+    background-<span class="keyword">image</span>: -moz-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);
+    background-<span class="keyword">image</span>: -o-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);
+    background-<span class="keyword">image</span>: -ms-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);
+    background-<span class="keyword">image</span>: linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);
+}
+
+.test-div {
+    .gradient(left, #<span class="number">663333</span>, #<span class="number">333333</span>);
+}
+</pre></td></tr></table></figure>
+
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="comment">/*快速渐变*/</span>
+<span class="built_in">.</span>quick<span class="attribute">-gradient</span> (@origin: left, @alpha: <span class="number">0.2</span>) {
+    background<span class="attribute">-image</span>: <span class="attribute">-webkit</span><span class="attribute">-linear</span><span class="attribute">-gradient</span>(@origin, rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));
+    background<span class="attribute">-image</span>: <span class="attribute">-moz</span><span class="attribute">-linear</span><span class="attribute">-gradient</span>(@origin, rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));
+    background<span class="attribute">-image</span>: <span class="attribute">-o</span><span class="attribute">-linear</span><span class="attribute">-gradient</span>(@origin, rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));
+    background<span class="attribute">-image</span>: <span class="attribute">-ms</span><span class="attribute">-linear</span><span class="attribute">-gradient</span>(@origin, rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));
+    background<span class="attribute">-image</span>: linear<span class="attribute">-gradient</span>(@origin, rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));
+}
+
+<span class="built_in">.</span>test<span class="attribute">-div</span> {
+    background<span class="attribute">-color</span>: <span class="variable">#bada55</span>;
+    <span class="built_in">.</span>quick<span class="attribute">-gradient</span>(top, <span class="number">0.2</span>);
+}
+</pre></td></tr></table></figure>
+
+<ul>
+<li>镜像</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="built_in">.</span>reflect (@length: <span class="number">50</span><span class="subst">%</span>, @opacity: <span class="number">0.2</span>){
+    <span class="attribute">-webkit</span><span class="attribute">-box</span><span class="attribute">-reflect</span>: below <span class="number">0</span>px <span class="attribute">-webkit</span><span class="attribute">-gradient</span>(linear, left top, left bottom, from(transparent),
+    color<span class="attribute">-stop</span>(@length, transparent), <span class="keyword">to</span>(rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,@opacity)));
+}
+
+<span class="built_in">.</span>test<span class="attribute">-div</span> {
+    <span class="built_in">.</span>reflect(<span class="number">20</span><span class="subst">%</span>, <span class="number">0.2</span>);
+}
+</pre></td></tr></table></figure>
+
+<ul>
+<li>颜色</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="comment">/*互补色*/</span>
+<span class="at_rule">@<span class="keyword">base:</span> #<span class="number">663333</span></span>;
+<span class="at_rule">@<span class="keyword">complement1:</span> <span class="function">spin(@base, <span class="number">180</span>)</span></span>;
+<span class="at_rule">@<span class="keyword">complement2:</span> <span class="function">darken(<span class="function">spin(@base, <span class="number">180</span>)</span>, <span class="number">5</span>%)</span></span>;
+<span class="at_rule">@<span class="keyword">lighten1:</span> <span class="function">lighten(@base, <span class="number">15</span>%)</span></span>;
+<span class="at_rule">@<span class="keyword">lighten2:</span> <span class="function">lighten(@base, <span class="number">30</span>%)</span></span>;
+
+<span class="class">.one</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @base</span></span>;<span class="rule">}</span></span>
+<span class="class">.two</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @complement1</span></span>;<span class="rule">}</span></span>
+<span class="class">.three</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @complement2</span></span>;<span class="rule">}</span></span>
+<span class="class">.four</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighten1</span></span>;<span class="rule">}</span></span>
+<span class="class">.five</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighten2</span></span>;<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight less"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="comment">/*颜色微调*/</span>
+<span class="at_rule">@<span class="keyword">base:</span> #<span class="number">663333</span></span>;
+<span class="at_rule">@<span class="keyword">lighter1:</span> <span class="function">lighten(<span class="function">spin(@base, <span class="number">5</span>)</span>, <span class="number">10</span>%)</span></span>;
+<span class="at_rule">@<span class="keyword">lighter2:</span> <span class="function">lighten(<span class="function">spin(@base, <span class="number">10</span>)</span>, <span class="number">20</span>%)</span></span>;
+<span class="at_rule">@<span class="keyword">darker1:</span> <span class="function">darken(<span class="function">spin(@base, -<span class="number">5</span>)</span>, <span class="number">10</span>%)</span></span>;
+<span class="at_rule">@<span class="keyword">darker2:</span> <span class="function">darken(<span class="function">spin(@base, -<span class="number">10</span>)</span>, <span class="number">20</span>%)</span></span>;
+
+<span class="class">.one</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @base</span></span>;<span class="rule">}</span></span>
+<span class="class">.two</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighter1</span></span>;<span class="rule">}</span></span>
+<span class="class">.three</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighter2</span></span>;<span class="rule">}</span></span>
+<span class="class">.four</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @darker1</span></span>;<span class="rule">}</span></span>
+<span class="class">.five</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @darker2</span></span>;<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>也可以参考<br><a href="https://github.com/zzyss86/LESS-CSS3/blob/master/css3.less" target="_blank" rel="external">css3预处理工具</a><br><a href="https://github.com/dmitryf/elements" target="_blank" rel="external">useful mixins</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://amoamo.github.io/2014/07/15/less/" data-id="4ojx7bck74zcpxwc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less-css/">less css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-console" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/07/04/console/" class="article-date">
@@ -338,7 +985,7 @@ console.profileEnd();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/07/04/console/" data-id="y4px9s8jmgprx6wb" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/07/04/console/" data-id="sdpptuu5g925znni" class="article-share-link">Share</a>
       
       
     </footer>
@@ -743,7 +1390,7 @@ function fn(rs) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/07/01/cross_domain/" data-id="sjpuykznpzyab4w4" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/07/01/cross_domain/" data-id="yox9qyn6do4avhl3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cross-domain/">cross domain</a></li></ul>
@@ -875,7 +1522,7 @@ function fn(rs) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="fiicgkbfhjvuw0sy" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="cyzoy5ah2yp6hhf9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -903,7 +1550,7 @@ function fn(rs) {
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less-css/">less css</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -912,7 +1559,7 @@ function fn(rs) {
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/cross-domain/" style="font-size: NaNpx;">cross domain</a>
+      <a href="/tags/cross-domain/" style="font-size: NaNpx;">cross domain</a><a href="/tags/less-css/" style="font-size: NaNpx;">less css</a>
     </div>
   </div>
 
@@ -921,7 +1568,7 @@ function fn(rs) {
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -931,6 +1578,10 @@ function fn(rs) {
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/07/15/less/">less入门</a>
+          </li>
         
           <li>
             <a href="/2014/07/04/console/">console使用小技巧</a>
