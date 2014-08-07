@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> 浮动demo </title>
+    </head>
+    <style>
+        /* css reset */
+        body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+            margin: 0;
+            padding: 0;
+        }
+        body, button, input, select, textarea {
+            font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',sans-serif;
+        }
+        /* css reset */
+        body {
+            background-color: #eee;
+        }
+        div {
+            padding: 15px;
+            margin: 10px;
+        }
+        .con {
+            border: 1px solid #ddd;
+            color: gray;
+            margin: 10px auto;
+            width: 500px;
+        }
+        .c-float {
+            float: left;
+        }
+        .c-margin {
+            margin-top: 50px;
+        }
+        .c-background {
+            background-color: #ccc;
+        }
+        .clear {
+            clear: both;
+        }
+        .clearfix:before, .clearfix:after {
+            content: "";
+            display: table;
+        }
+        .clearfix:after {
+            clear: both;
+        }
+        .clearfix {
+            *zoom: 1;
+        }
+    </style>
+    <body>
+        <div class="con">
+            <div class="c-float c-background">
+                我设置了浮动
+            </div>
+        </div>
+        <div class="c-margin con">
+            <div class="c-float c-background">
+                我设置了浮动
+            </div>
+            <div class="clear">
+                我清除浮动
+            </div>
+        </div>
+        <div class="c-margin con clearfix">
+            <div class="c-float c-background">
+                我设置了浮动
+            </div>
+        </div>
+        <div class="c-margin con">
+            <div class="c-float">
+                我设置了浮动，我没背景
+            </div>
+            <div class="c-background">
+                我没设置浮动，我有背景
+            </div>
+        </div>
+        <div class="c-margin con">
+            <div class="c-float">
+                我设置了浮动，我没背景
+            </div>
+            <div class="c-background clear">
+                我没设置浮动，我有背景
+            </div>
+        </div>
+    </body>
+</html>

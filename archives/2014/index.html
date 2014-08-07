@@ -62,6 +62,310 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-css_selector" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/08/06/css_selector/" class="article-date">
+  <time datetime="2014-08-06T03:15:11.000Z" itemprop="datePublished">Aug 6 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/08/06/css_selector/">css选择器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="css选择器">css选择器</h2>
+<h3 id="css选择器分类">css选择器分类</h3>
+<ul>
+<li>id选择器    <figure class="highlight #id-name"><figcaption><span>{}```</span></figcaption><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="deletion">- 类选择器</span>
+</pre></td></tr></table></figure>.class-name {}<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="deletion">- 标签选择器</span>
+</pre></td></tr></table></figure>div {}<figure class="highlight ```h1"><figcaption><span>{}``` ```p {}```</span></figcaption><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="deletion">- 相邻选择器</span>
+</pre></td></tr></table></figure>div + p {}<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="deletion">- 子选择器</span>
+</pre></td></tr></table></figure>ul &lt; li {}<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="deletion">- 后代选择器</span>
+</pre></td></tr></table></figure>ul li {}<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="deletion">- 通配符选择器</span>
+</pre></td></tr></table></figure><em> {}<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>-<span class="ruby"> 属性选择器  
+</span>    -<span class="ruby"></span>
+</pre></td></tr></table></figure>h1[class] { //所有带有class属性的h1}<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="deletion">-</span>
+</pre></td></tr></table></figure>[foo^=’bar’] foo属性以’bar’开头的所有元素<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="deletion">-</span>
+</pre></td></tr></table></figure>[foo$=’bar’] foo属性以’bar’结尾的所有元素<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="deletion">-</span>
+</pre></td></tr></table></figure>[foo</em>=’bar’] foo属性包含’bar’的所有元素<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="deletion">- 一般有一种场景：比如想对包含某个网站链接的a标签应用某种特殊样式</span>
+</pre></td></tr></table></figure>a[href*=’taobao.com’] {}<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>-<span class="ruby"> 伪类选择器/伪元素选择器
+</span>    -<span class="ruby"> 伪类：</span>
+</pre></td></tr></table></figure>a:link {}<figure class="highlight ```a:hover"><figcaption><span>{}``` **一般建议申明的顺序为：link visited focus hover active**</span></figcaption><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="deletion">- 伪元素：</span>
+</pre></td></tr></table></figure>a:after {}<figure class="highlight ```a:before"><figcaption><span>{}``` </span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>
+### 权重
+
+-<span class="ruby"> 通配选择器：<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>
+</span>-<span class="ruby"> 标签、类、属性、伪元素选择器：<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>
+</span>-<span class="ruby"> 伪类选择器：<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>
+</span>-<span class="ruby"> id选择器：<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>
+</span>
+当我们在使用规则时，计算权重，就是把各选择器的权值加到一起如：
+</pre></td></tr></table></figure>css<br>  h1 {} // 0001<br>  h1 a {} //0002<br>  h1 a.node {} //0012<h1 id="node_{}_//0100">node {} //0100</h1>
+  div#sidebar *[href] {} //0111<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre>计算出了权值，怎么来比较呢？需要注意的是，这个权值是从左到右按位进行比较的，<span class="number">1000</span>大于任何0xxx，<span class="number">01</span>xx大于任何<span class="number">00</span>xx，以此类推。
+
+简单来说，样式优先级可以总结为：
+important&gt;内联&gt;id&gt;<span class="class"><span class="keyword">class</span>&gt;标签/伪类/属性选择&gt;伪元素&gt;通配符&gt;继承</span>
+
+**但是实际编码中，样式的优先级还跟样式定义的顺序有关系，在样式的定义时不仅需要注意优先级也需要关注尽量减少css的重复定义和代码冗余**
+
+<span class="comment">### css选择器执行效率</span>
+
+首先应该了解，对于
+</pre></td></tr></table></figure>h1 a {}<figure class="highlight 这样的样式，系统是怎么处理的呢？系统对样式选择器的匹配顺序是从右到左的，也就是会先找到所有的a标签，然后继续向左匹配，查找父辈元素中是否有h1元素，如果都能匹配到，则找到。"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>
+那么怎么编写简洁高效的css呢？有几条很简单的原则
+
+- 不要在<span class="keyword">id</span>选择器前再加其他的选择器，因为<span class="keyword">id</span>本身是唯一的
+</pre></td></tr></table></figure>css<pre><code>  <span class="comment">//bad： div#id-name {}</span>
+  <span class="variable">#id</span><span class="attribute">-name</span> {}
+</code></pre>  <figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>-<span class="ruby"> 不要在<span class="class"><span class="keyword">class</span>选择器前再加标签选择器</span></span>
+</pre></td></tr></table></figure>css<pre><code>  <span class="comment">//bad: div.class-name {}</span>
+  .<span class="keyword">class</span>-name {}
+</code></pre>  <figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>-<span class="ruby"> 尽量在dom中增加<span class="class"><span class="keyword">class</span>的方式来标记而不是通过属性选择或者层级的方式来定义样式</span></span>
+</pre></td></tr></table></figure>css<pre><code>  //bad: a img[src=<span class="string">"xxx"</span>] <span class="list">{}</span>
+  .xx-img <span class="list">{}</span>
+</code></pre>  ```</li>
+<li>尽量少定义层级关系，因为这会增加查找开销</li>
+</ul>
+<p><strong>记住一点，如果直接可以定位到的元素，不要增加不必要的层级或者限制条件</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://amoamo.github.io/2014/08/06/css_selector/" data-id="60r1938ihpkv203r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-skills" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/07/16/skills/" class="article-date">
+  <time datetime="2014-07-16T06:28:59.000Z" itemprop="datePublished">Jul 16 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/07/16/skills/">skills</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前端开发中小技巧和注意事项">前端开发中小技巧和注意事项</h2>
+<h3 id="1、浏览器地址栏中执行js代码">1、浏览器地址栏中执行js代码</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>javascript<span class="value">:alert(<span class="string">'hello,amo!'</span>);</span>
+</pre></td></tr></table></figure>
+
+<p>这里需要注意的是：<br>如果是拷贝一段脚本到浏览器地址栏中，如果是IE或者Chrome会自动过滤掉javascript:部分，如果要保证能被正确执行请手动添加。但是对于Firefox不会。</p>
+<h3 id="2、浏览器地址栏中执行html代码">2、浏览器地址栏中执行html代码</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>data:text/html,<span class="tag">&lt;<span class="title">h1</span>&gt;</span>hello,amo!<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>这里需要注意的是：<br>只有在非IE内核的浏览器中才能正确显示。</p>
+<h3 id="3、把浏览器当编辑器">3、把浏览器当编辑器</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="typedef"><span class="keyword">data</span>:text/html, &lt;html contenteditable&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>这样浏览器就变成一个编辑器了。为什么可以实现呢？这是因为H5中新加了contenteditable属性，当元素指定了该属性，内容就变得可以编辑了。</p>
+<p>如果对于一个现有的页面，想要将它变成编辑器模式怎么做呢？<br>可以在控制台中输入：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>document.<span class="keyword">body</span>.contenteditable = <span class="literal">true</span>;
+</pre></td></tr></table></figure>
+
+
+<h3 id="4、清除浮动常用方法">4、清除浮动常用方法</h3>
+<p>在网页的布局上或多或少都会使用到浮动。但是浮动往往也会产生一些副作用，最常见的便是会影响兄弟元素和父元素。所以一定要记得清除浮动。我一般用以下两种方法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="code"><pre><span class="class">.con</span> <span class="rules">{
+    <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1</span>px solid <span class="hexcolor">#ddd</span></span></span>;
+    <span class="rule"><span class="attribute">color</span>:<span class="value"> gray</span></span>;
+    <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">10</span>px auto</span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">500</span>px</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.c-float</span> <span class="rules">{
+    <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.c-margin</span> <span class="rules">{
+    <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> <span class="number">50</span>px</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.c-background</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#ccc</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.clear</span> <span class="rules">{
+    <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.clearfix</span><span class="pseudo">:before</span>, <span class="class">.clearfix</span><span class="pseudo">:after</span> <span class="rules">{
+    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;
+    <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.clearfix</span><span class="pseudo">:after</span> <span class="rules">{
+    <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.clearfix</span> <span class="rules">{
+    <span class="rule">*<span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="comment">&lt;!-- 被浮动影响，父元素高度塌陷 --&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-float c-background"</span>&gt;</span>
+        我设置了浮动
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="comment">&lt;!-- 加入一个空的div，并设置清除浮动 --&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-margin con"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-float c-background"</span>&gt;</span>
+	    我设置了浮动
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"clear"</span>&gt;</span>
+        我清除浮动
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="comment">&lt;!-- 利用:after伪元素 --&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-margin con clearfix"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-float c-background"</span>&gt;</span>
+	    我设置了浮动
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure><br><a href="/demo/float.html">demo</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://amoamo.github.io/2014/07/16/skills/" data-id="uvwftbhgs3p9fyet" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-less" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/07/15/less/" class="article-date">
@@ -232,7 +536,7 @@ lessc -x test.less &gt; test.css
 </pre></td></tr></table></figure>
 
 <h4 id="2、mixins">2、mixins</h4>
-<p>在less中，mixins指在一个class钟混入另一个已经定义的class。</p>
+<p>在less中，mixins指在一个class中混入另一个已经定义的class。</p>
 <p>less:</p>
 <figure class="highlight less"><table><tr><td class="gutter"><pre>1
 2
@@ -697,7 +1001,7 @@ box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/07/15/less/" data-id="4ojx7bck74zcpxwc" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/07/15/less/" data-id="q9mqqaxfis79alig" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less-css/">less css</a></li></ul>
@@ -985,7 +1289,7 @@ console.profileEnd();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/07/04/console/" data-id="sdpptuu5g925znni" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/07/04/console/" data-id="zdue8yps5w592ofk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1390,7 +1694,7 @@ function fn(rs) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/07/01/cross_domain/" data-id="yox9qyn6do4avhl3" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/07/01/cross_domain/" data-id="lfcoddtz72ayaxiq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cross-domain/">cross domain</a></li></ul>
@@ -1522,7 +1826,7 @@ function fn(rs) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="cyzoy5ah2yp6hhf9" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="9lue6k6kp06awvwo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1541,7 +1845,7 @@ function fn(rs) {
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1550,7 +1854,7 @@ function fn(rs) {
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less-css/">less css</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less-css/">less css</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1559,7 +1863,7 @@ function fn(rs) {
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/cross-domain/" style="font-size: NaNpx;">cross domain</a><a href="/tags/less-css/" style="font-size: NaNpx;">less css</a>
+      <a href="/tags/cross-domain/" style="font-size: NaNpx;">cross domain</a><a href="/tags/css/" style="font-size: NaNpx;">css</a><a href="/tags/less-css/" style="font-size: NaNpx;">less css</a>
     </div>
   </div>
 
@@ -1568,7 +1872,7 @@ function fn(rs) {
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1580,6 +1884,14 @@ function fn(rs) {
       <ul>
         
           <li>
+            <a href="/2014/08/06/css_selector/">css选择器</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/16/skills/">skills</a>
+          </li>
+        
+          <li>
             <a href="/2014/07/15/less/">less入门</a>
           </li>
         
@@ -1589,10 +1901,6 @@ function fn(rs) {
         
           <li>
             <a href="/2014/07/01/cross_domain/">跨域问题及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2014/06/18/hexo/">github pages &amp; hexo建站指南</a>
           </li>
         
       </ul>
