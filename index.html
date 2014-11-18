@@ -14,6 +14,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Do la a mo">
 <meta name="twitter:description">
+
   
     <link rel="alternative" href="/atom.xml" title="Do la a mo" type="application/atom+xml">
   
@@ -21,6 +22,7 @@
     <link rel="icon" href="/favicon.png">
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
+
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
 </head>
@@ -45,7 +47,8 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-          <a class="main-nav-link" href="/games/flappybird.html" target="_blank">Game</a>
+          <a class="main-nav-link" href="/www/games/flappybird.html" target="_blank">Game</a>
+          <a class="main-nav-link" href="/www/demo/index.html" target="_blank">Demo</a>
       </nav>
       <nav id="sub-nav">
         
@@ -59,8 +62,149 @@
     </div>
   </div>
 </header>
+
       <div class="outer">
         <section id="main">
+  
+    <article id="post-clip" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/11/12/clip/" class="article-date">
+  <time datetime="2014-11-12T06:02:02.000Z" itemprop="datePublished">Nov 12 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/12/clip/">clip用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>clip 属性剪裁绝对定位元素。所有的主流浏览器都支持该元素。</p>
+<p>这个属性用于定义一个剪裁矩形。对于一个绝对定义元素，在这个矩形内的内容才可见。出了这个剪裁区域的内容会根据 overflow 的值来处理。剪裁区域可能比元素的内容区大，也可能比内容区小。</p>
+<h2 id="基本语法">基本语法</h2>
+<p><img src="/css/images/clip_0.png" alt=""><br><img src="/css/images/clip_1.png" alt=""></p>
+<h2 id="用法">用法</h2>
+<pre><code><span class="attribute">clip</span><span class="value">: <span class="function">rect</span>(<span class="number">10px</span>  <span class="number">350px</span>  <span class="number">170px</span>  <span class="number">0</span>);</span> <span class="comment">/* IE4 to IE7 */</span>
+<span class="attribute">clip</span><span class="value">: <span class="function">rect</span>(<span class="number">10px</span>, <span class="number">350px</span>, <span class="number">170px</span>, <span class="number">0</span>);</span> <span class="comment">/* IE8+ &amp; other browsers */</span>
+</code></pre><h2 id="示例">示例</h2>
+<pre><code><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+    <span class="class">.demo-clip</span> <span class="rules">{
+        <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="function">rgb</span>(<span class="number">168</span>, <span class="number">231</span>, <span class="number">168</span>)</span></span>;
+        <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100px</span></span></span>; 
+        <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100px</span></span></span>;
+        <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+        <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">5px</span> <span class="number">75px</span> <span class="number">75px</span> <span class="number">5px</span>)</span></span>;
+        <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">5px</span>, <span class="number">75px</span>, <span class="number">75px</span>, <span class="number">5px</span>)</span></span>;
+    <span class="rule">}</span></span>
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"demo-clip"</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</code></pre><p><img src="/css/images/clip_2.png" alt=""><br>可以看到rect(top, right, bottom, left)四个值指的是相对左上角(0, 0)的偏移数值。</p>
+<h2 id="有趣的实现">有趣的实现</h2>
+<h3 id="炫彩文字">炫彩文字</h3>
+<pre><code><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+<span class="class">.demo-color-text</span> <span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;
+    <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">26px</span></span></span>;
+    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#f6f6f6</span></span></span>;
+    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">3em</span></span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">10em</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.demo-text-top</span> <span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#CC0000</span></span></span>;
+    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">2em</span></span></span>;
+    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">1em</span></span></span>;
+    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">0</span> auto <span class="number">13px</span> <span class="number">0</span>)</span></span>;
+    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">0</span>, auto, <span class="number">13px</span>, <span class="number">0</span>)</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.demo-text-bottom</span> <span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#333333</span></span></span>;
+    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">2em</span></span></span>;
+    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">1em</span></span></span>;
+    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">13px</span>, auto, auto, auto)</span></span>;
+<span class="rule">}</span></span>
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"demo-color-text"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"demo-text-top"</span>&gt;</span>colorful text<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"demo-text-bottom"</span>&gt;</span>colorful text<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</code></pre><p><img src="/css/images/clip_3.png" alt=""></p>
+<h3 id="hover控制图片的显示">hover控制图片的显示</h3>
+<pre><code><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css">
+<span class="class">.demo-show-hide</span> <span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;
+    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#f6f6f6</span></span></span>;
+    <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">10px</span> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">15em</span></span></span>;
+    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">10em</span></span></span>;
+    <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">10px</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.demo-hover-btn</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#CC0000</span></span></span>;
+    <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;
+    <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">3px</span></span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">5em</span></span></span>;
+    <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">3px</span> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;
+    <span class="rule"><span class="attribute">cursor</span>:<span class="value"> pointer</span></span>;
+    <span class="rule"><span class="attribute">text-align</span>:<span class="value"> center</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.demo-hover-btn</span><span class="pseudo">:hover</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#333</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.demo-hover-img</span> <span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+    <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;
+    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">45px</span></span></span>;
+    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">10px</span></span></span>;
+    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">120px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">160px</span>)</span></span>;
+    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">120px</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">160px</span>)</span></span>;
+    <span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"> all <span class="number">0.5s</span> linear</span></span>;
+    <span class="rule"><span class="attribute">-moz-transition</span>:<span class="value"> all <span class="number">0.5s</span> linear</span></span>;
+    <span class="rule"><span class="attribute">transition</span>:<span class="value"> all <span class="number">0.5s</span> linear</span></span>;
+<span class="rule">}</span></span>
+<span class="class">.demo-hover-btn</span><span class="pseudo">:hover</span> ~ <span class="class">.demo-hover-img</span> <span class="rules">{
+    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">0</span> <span class="number">160px</span> <span class="number">120px</span> <span class="number">0</span>)</span></span>;
+    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">0</span>, <span class="number">160px</span>, <span class="number">120px</span>, <span class="number">0</span>)</span></span>;
+<span class="rule">}</span></span>
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"demo-show-hide"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"demo-hover-btn"</span>&gt;</span>
+        hover me
+    <span class="tag">&lt;/<span class="title">span</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">img</span> <span class="attribute">class</span>=<span class="value">"demo-hover-img"</span> <span class="attribute">src</span>=<span class="value">"http://img3.douban.com/icon/ul29163290-16.jpg"</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</code></pre><p><img src="/css/images/clip_4.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://amoamo.github.io/2014/11/12/clip/" data-id="nzz34tcicp6b6t3r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-css_selector" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -97,17 +241,26 @@
 <li>子选择器    ul &lt; li {}</li>
 <li>后代选择器  ul li {}</li>
 <li>通配符选择器 * {}</li>
-<li>属性选择器    <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>h1[<span class="class"><span class="keyword">class</span>] {</span> <span class="comment">//所有带有class属性的h1}</span>
-</pre></td></tr></table></figure><br>  <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>[foo^=<span class="string">'bar'</span>] foo属性以<span class="string">'bar'</span>开头的所有元素
-</pre></td></tr></table></figure><br>  <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>[foo<span class="variable">$=</span><span class="string">'bar'</span>] foo属性以<span class="string">'bar'</span>结尾的所有元素
-</pre></td></tr></table></figure><br>  <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>[foo*=<span class="string">'bar'</span>] foo属性包含<span class="string">'bar'</span>的所有元素
-</pre></td></tr></table></figure><br>  <strong>一般有一种场景：比如想对包含某个网站链接的a标签应用某种特殊样式</strong><br>  <figure class="highlight css"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">a</span><span class="attr_selector">[href*='taobao.com']</span> <span class="rules">{<span class="rule">}</span></span>
-</pre></td></tr></table></figure></li>
+<li>属性选择器  </li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">h1[<span class="class"><span class="keyword">class</span>] </span>{ <span class="comment">//所有带有class属性的h1}</span></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[foo^=<span class="string">'bar'</span>] foo属性以<span class="string">'bar'</span>开头的所有元素</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[foo<span class="variable">$=</span><span class="string">'bar'</span>] foo属性以<span class="string">'bar'</span>结尾的所有元素</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[foo*=<span class="string">'bar'</span>] foo属性包含<span class="string">'bar'</span>的所有元素</div></pre></td></tr></table></figure>
+
+<pre><code><span class="keyword">*</span><span class="keyword">*</span>一般有一种场景：比如想对包含某个网站链接的a标签应用某种特殊样式<span class="keyword">*</span><span class="keyword">*</span>
+</code></pre><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">a</span><span class="attr_selector">[href*='taobao.com']</span> <span class="rules">{<span class="rule">}</span></span></div></pre></td></tr></table></figure>
+
+<ul>
 <li>伪类选择器/伪元素选择器<ul>
 <li>伪类：a:link {}    a:hover {} <strong>一般建议申明的顺序为：link visited focus hover active</strong></li>
 <li>伪元素：a:after {}  a:before {} </li>
@@ -122,38 +275,30 @@
 <li>id选择器：0,1,0,0</li>
 </ul>
 <p>当我们在使用规则时，计算权重，就是把各选择器的权值加到一起如：</p>
-<p><figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>h1 {} // 0001
-h1 a {} //0002
-h1 a.node {} //0012
-#node {} //0100
-div#sidebar *[href] {} //0111
-</pre></td></tr></table></figure><br>计算出了权值，怎么来比较呢？需要注意的是，这个权值是从左到右按位进行比较的，1000大于任何0xxx，01xx大于任何00xx，以此类推。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">h1 {} // 0001</div><div class="line">h1 a {} //0002</div><div class="line">h1 a.node {} //0012</div><div class="line">#node {} //0100</div><div class="line">div#sidebar *[href] {} //0111</div></pre></td></tr></table></figure>
+
+<p>计算出了权值，怎么来比较呢？需要注意的是，这个权值是从左到右按位进行比较的，1000大于任何0xxx，01xx大于任何00xx，以此类推。</p>
 <p>简单来说，样式优先级可以总结为：<br>important&gt;内联&gt;id&gt;class&gt;标签/伪类/属性选择&gt;伪元素&gt;通配符&gt;继承</p>
 <p><strong>但是实际编码中，样式的优先级还跟样式定义的顺序有关系，在样式的定义时不仅需要注意优先级也需要关注尽量减少css的重复定义和代码冗余</strong></p>
 <h3 id="css选择器执行效率">css选择器执行效率</h3>
 <p>首先应该了解，对于<strong>h1 a {}</strong>这样的样式，系统是怎么处理的呢？系统对样式选择器的匹配顺序是从右到左的，也就是会先找到所有的a标签，然后继续向左匹配，查找父辈元素中是否有h1元素，如果都能匹配到，则找到。</p>
 <p>那么怎么编写简洁高效的css呢？有几条很简单的原则</p>
 <ul>
-<li>不要在id选择器前再加其他的选择器，因为id本身是唯一的  <figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>//bad： div#id-name {}
-#id-name {}
-</pre></td></tr></table></figure></li>
-<li>不要在class选择器前再加标签选择器   <figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>//bad: div.class-name {}
-.class-name {}
-</pre></td></tr></table></figure></li>
-<li>尽量在dom中增加class的方式来标记而不是通过属性选择或者层级的方式来定义样式  <figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>//bad: a img[src="xxx"] {}
-.xx-img {}
-</pre></td></tr></table></figure></li>
+<li>不要在id选择器前再加其他的选择器，因为id本身是唯一的</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//bad： div#id-name {}</div><div class="line">#id-name {}</div></pre></td></tr></table></figure>
+
+<ul>
+<li>不要在class选择器前再加标签选择器 </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//bad: div.class-name {}</div><div class="line">.class-name {}</div></pre></td></tr></table></figure>
+
+<ul>
+<li>尽量在dom中增加class的方式来标记而不是通过属性选择或者层级的方式来定义样式</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//bad: a img[src="xxx"] {}</div><div class="line">.xx-img {}</div></pre></td></tr></table></figure>
+
+<ul>
 <li>尽量少定义层级关系，因为这会增加查找开销</li>
 </ul>
 <p><strong>记住一点，如果直接可以定位到的元素，不要增加不必要的层级或者限制条件</strong></p>
@@ -161,7 +306,7 @@ div#sidebar *[href] {} //0111
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/08/06/css_selector/" data-id="1ht7cqlbtuij3nom" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/08/06/css_selector/" data-id="6zfm04vd8z1l9226" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
@@ -197,141 +342,42 @@ div#sidebar *[href] {} //0111
       
         <h2 id="前端开发中小技巧和注意事项">前端开发中小技巧和注意事项</h2>
 <h3 id="1、浏览器地址栏中执行js代码">1、浏览器地址栏中执行js代码</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>javascript<span class="value">:alert(<span class="string">'hello,amo!'</span>);</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">javascript<span class="value">:<span class="function">alert</span>(<span class="string">'hello,amo!'</span>);</span></div></pre></td></tr></table></figure>
 
 <p>这里需要注意的是：<br>如果是拷贝一段脚本到浏览器地址栏中，如果是IE或者Chrome会自动过滤掉javascript:部分，如果要保证能被正确执行请手动添加。但是对于Firefox不会。</p>
 <h3 id="2、浏览器地址栏中执行html代码">2、浏览器地址栏中执行html代码</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>data:text/html,<span class="tag">&lt;<span class="title">h1</span>&gt;</span>hello,amo!<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data:text/html,<span class="tag">&lt;<span class="title">h1</span>&gt;</span>hello,amo!<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>这里需要注意的是：<br>只有在非IE内核的浏览器中才能正确显示。</p>
 <h3 id="3、把浏览器当编辑器">3、把浏览器当编辑器</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="typedef"><span class="keyword">data</span>:text/html, &lt;html contenteditable&gt;</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="typedef"><span class="keyword">data</span>:text/html, &lt;html contenteditable&gt;</span></div></pre></td></tr></table></figure>
 
 <p>这样浏览器就变成一个编辑器了。为什么可以实现呢？这是因为H5中新加了contenteditable属性，当元素指定了该属性，内容就变得可以编辑了。</p>
 <p>如果对于一个现有的页面，想要将它变成编辑器模式怎么做呢？<br>可以在控制台中输入：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>document.<span class="keyword">body</span>.contenteditable = <span class="literal">true</span>;
-</pre></td></tr></table></figure>
-
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.body.contenteditable = <span class="literal">true</span>;</div></pre></td></tr></table></figure>
 
 <h3 id="4、清除浮动常用方法">4、清除浮动常用方法</h3>
 <p>在网页的布局上或多或少都会使用到浮动。但是浮动往往也会产生一些副作用，最常见的便是会影响兄弟元素和父元素。所以一定要记得清除浮动。我一般用以下两种方法：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-</pre></td><td class="code"><pre><span class="class">.con</span> <span class="rules">{
-    <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1</span>px solid <span class="hexcolor">#ddd</span></span></span>;
-    <span class="rule"><span class="attribute">color</span>:<span class="value"> gray</span></span>;
-    <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">10</span>px auto</span></span>;
-    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">500</span>px</span></span>;
-<span class="rule">}</span></span>
-<span class="class">.c-float</span> <span class="rules">{
-    <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;
-<span class="rule">}</span></span>
-<span class="class">.c-margin</span> <span class="rules">{
-    <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> <span class="number">50</span>px</span></span>;
-<span class="rule">}</span></span>
-<span class="class">.c-background</span> <span class="rules">{
-    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#ccc</span></span></span>;
-<span class="rule">}</span></span>
-<span class="class">.clear</span> <span class="rules">{
-    <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;
-<span class="rule">}</span></span>
-<span class="class">.clearfix</span><span class="pseudo">:before</span>, <span class="class">.clearfix</span><span class="pseudo">:after</span> <span class="rules">{
-    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;
-    <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>;
-<span class="rule">}</span></span>
-<span class="class">.clearfix</span><span class="pseudo">:after</span> <span class="rules">{
-    <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;
-<span class="rule">}</span></span>
-<span class="class">.clearfix</span> <span class="rules">{
-    <span class="rule">*<span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;
-<span class="rule">}</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class">.con</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1px</span> solid <span class="hexcolor">#ddd</span></span></span>;</div><div class="line">    <span class="rule"><span class="attribute">color</span>:<span class="value"> gray</span></span>;</div><div class="line">    <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">10px</span> auto</span></span>;</div><div class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">500px</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.c-float</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.c-margin</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.c-background</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#ccc</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.clear</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.clearfix</span><span class="pseudo">:before</span>, <span class="class">.clearfix</span><span class="pseudo">:after</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</div><div class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.clearfix</span><span class="pseudo">:after</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.clearfix</span> <span class="rules">{</span></div><div class="line">    <span class="rule">*<span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
 
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="comment">&lt;!-- 被浮动影响，父元素高度塌陷 --&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-float c-background"</span>&gt;</span>
-        我设置了浮动
-    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
 
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="comment">&lt;!-- 加入一个空的div，并设置清除浮动 --&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-margin con"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-float c-background"</span>&gt;</span>
-	    我设置了浮动
-    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"clear"</span>&gt;</span>
-        我清除浮动
-    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
 
-<p><figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="comment">&lt;!-- 利用:after伪元素 --&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-margin con clearfix"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-float c-background"</span>&gt;</span>
-	    我设置了浮动
-    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure><br><a href="/demo/float.html">demo</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 被浮动影响，父元素高度塌陷 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-float c-background"</span>&gt;</span></div><div class="line">        我设置了浮动</div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 加入一个空的div，并设置清除浮动 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-margin con"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-float c-background"</span>&gt;</span></div><div class="line">	    我设置了浮动</div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"clear"</span>&gt;</span></div><div class="line">        我清除浮动</div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 利用:after伪元素 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-margin con clearfix"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c-float c-background"</span>&gt;</span></div><div class="line">	    我设置了浮动</div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><a href="/demo/float.html">demo</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/07/16/skills/" data-id="lcsxl9syhnmx6v3e" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/07/16/skills/" data-id="6hlgggu8hkprkyue" class="article-share-link">Share</a>
       
       
     </footer>
@@ -370,58 +416,26 @@ div#sidebar *[href] {} //0111
 <h4 id="1、命令行下使用">1、命令行下使用</h4>
 <p>Less可以通过npm在命令行上使用，作为一个脚本文件浏览器或用于广泛的第三方工具下载。</p>
 <p>因为我的电脑已经安装了node环境，所以可以直接通过npm包安装的方式来安装less。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>npm install -g less
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g less</div></pre></td></tr></table></figure>
 
 <p>完成安装之后，便可以通过lessc命令来编译less文件了。如下例：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="at_rule">@<span class="keyword">color:</span> #ccc</span>;
-
-<span class="tag">body</span> <span class="rules">{
-    <span class="rule"><span class="attribute">color</span>:<span class="value"> @color</span></span>;
-<span class="rule">}</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="at_rule">@<span class="keyword">color:</span> #ccc</span>;</div><div class="line"></div><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">color</span>:<span class="value"> @color</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
 
 <p>编译该文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>lessc test.less &gt; test.css
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lessc test.less &gt; test.css</div></pre></td></tr></table></figure>
 
 <p>便可以得到test.css文件如下：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">body</span> <span class="rules">{
-  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#ccc</span></span></span>;
-<span class="rule">}</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#ccc</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
 
 <p>当然lessc后也可以跟很多的参数，如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>//-x表示压缩
-lessc -x test.less &gt; test.css
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//-x表示压缩</div><div class="line">lessc -x test.less &gt; test.css</div></pre></td></tr></table></figure>
 
 <p>更多命令可以参考 —help或者参考<a href="http://lesscss.org/usage/" target="_blank" rel="external">官网</a></p>
 <h4 id="2、客户端使用">2、客户端使用</h4>
 <p>在浏览器中使用less.js开发是很好的，但不推荐用于生产环境中。</p>
 <p><strong>浏览器端使用是在使用LESS开发时最直观的一种方式。如果是在生产环境中，尤其是对性能要求比较高的场合，建议使用node或者其它第三方工具先编译成CSS再上线使用。</strong></p>
 <p>下面看如果直接在客户端来使用</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="comment">&lt;!-- 目标样式表 --&gt;</span>
-<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet/less"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"test.less"</span> /&gt;</span>
-<span class="comment">&lt;!-- less文件 --&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"less.min.js"</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 目标样式表 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet/less"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"test.less"</span> /&gt;</span></div><div class="line"><span class="comment">&lt;!-- less文件 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"less.min.js"</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>这样当在浏览器中访问该页面时，less.min.js便会编译test.less并在页面head中插入相应编译后的css样式</p>
 <p><strong>有两点需要特别注意:</strong></p>
@@ -435,278 +449,58 @@ lessc -x test.less &gt; test.css
 <h4 id="1、变量">1、变量</h4>
 <p>less允许开发者自定义变量，这样做有什么好处呢？如下例：</p>
 <p>less:</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="variable">@artical</span>-<span class="keyword">color</span>: #fff;
-<span class="variable">@title</span>-<span class="keyword">color</span>: #ccc;
-
-.con {
-    .con-title {
-        <span class="keyword">color</span>: <span class="variable">@title</span>-<span class="keyword">color</span>;
-    }
-    .con-artical {
-        <span class="keyword">color</span>: <span class="variable">@artical</span>-<span class="keyword">color</span>;
-    }
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@artical</span>-<span class="keyword">color</span>: #fff;</div><div class="line"><span class="variable">@title</span>-<span class="keyword">color</span>: #ccc;</div><div class="line"></div><div class="line">.con {</div><div class="line">    .con-title {</div><div class="line">        <span class="keyword">color</span>: <span class="variable">@title</span>-<span class="keyword">color</span>;</div><div class="line">    }</div><div class="line">    .con-artical {</div><div class="line">        <span class="keyword">color</span>: <span class="variable">@artical</span>-<span class="keyword">color</span>;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>css：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="class">.con</span> <span class="class">.con-title</span> <span class="rules">{
-    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#ccc</span></span></span>;
-<span class="rule">}</span></span>
-<span class="class">.con</span> <span class="class">.con-artical</span> <span class="rules">{
-    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;
-<span class="rule">}</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class">.con</span> <span class="class">.con-title</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#ccc</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.con</span> <span class="class">.con-artical</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
 
 <p>不难看到，通过这种方式，可以方便对变量进行统一的管理，可以抽取公共的属性在全局进行定义，一旦涉及到修改，只需修改变量即可。此外，也可以利用这种特性，来定义主题。</p>
 <p>在编程中既然有变量，那么就必定涉及到一个概念作用域。下面来看下在less中变量的作用域是怎样的。</p>
 <p>less:</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>@<span class="keyword">color</span>: <span class="preprocessor">#fff;</span>
-.con {
-    <span class="keyword">color</span>: @<span class="keyword">color</span>;
-    @<span class="keyword">color</span>: <span class="preprocessor">#000;</span>
-    .con-title {
-        background-<span class="keyword">color</span>: @<span class="keyword">color</span>;
-    }
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">color</span>: <span class="preprocessor">#fff;</span></div><div class="line">.con {</div><div class="line">    <span class="keyword">color</span>: @<span class="keyword">color</span>;</div><div class="line">    @<span class="keyword">color</span>: <span class="preprocessor">#000;</span></div><div class="line">    .con-title {</div><div class="line">        background-<span class="keyword">color</span>: @<span class="keyword">color</span>;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>css:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="class">.con</span> <span class="rules">{
-    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;
-<span class="rule">}</span></span>
-<span class="class">.con</span> <span class="class">.con-title</span> <span class="rules">{
-    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;
-<span class="rule">}</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class">.con</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.con</span> <span class="class">.con-title</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
 
 <h4 id="2、mixins">2、mixins</h4>
 <p>在less中，mixins指在一个class中混入另一个已经定义的class。</p>
 <p>less:</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="comment">//定义一个样式</span>
-<span class="class">.btn</span> {
-    <span class="attribute">background-color</span><span class="value">: <span class="hexcolor">#b72b25</span>;</span>
-    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#fff</span>;</span>
-}
-<span class="comment">//在其他的选择器中使用</span>
-<span class="class">.con-btns</span> {
-    <span class="class">.btn</span>;
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义一个样式</span></div><div class="line"><span class="class">.btn</span> {</div><div class="line">    <span class="attribute">background-color</span><span class="value">: <span class="hexcolor">#b72b25</span>;</span></div><div class="line">    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#fff</span>;</span></div><div class="line">}</div><div class="line"><span class="comment">//在其他的选择器中使用</span></div><div class="line"><span class="class">.con-btns</span> {</div><div class="line">    <span class="class">.btn</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>css:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="class">.con-btns</span> <span class="rules">{
-    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#b72b25</span></span></span>;
-    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;
-<span class="rule">}</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class">.con-btns</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#b72b25</span></span></span>;</div><div class="line">    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
 
 <p>mixins其实就是一种规则的复用。除此之外，mixins还允许混入参数。</p>
 <p>less:</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="comment">//定义一个样式</span>
-.btn(@<span class="keyword">color</span>) {
-    background-<span class="keyword">color</span>: @<span class="keyword">color</span>;
-}
-<span class="comment">//在其他的选择器中使用</span>
-.con-enable=btn {
-    .btn(<span class="preprocessor">#b72b25);</span>
-}
-.con-disable=btn {
-    .btn(<span class="preprocessor">#ddd);</span>
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义一个样式</span></div><div class="line">.btn(@<span class="keyword">color</span>) {</div><div class="line">    background-<span class="keyword">color</span>: @<span class="keyword">color</span>;</div><div class="line">}</div><div class="line"><span class="comment">//在其他的选择器中使用</span></div><div class="line">.con-enable=btn {</div><div class="line">    .btn(<span class="preprocessor">#b72b25);</span></div><div class="line">}</div><div class="line">.con-disable=btn {</div><div class="line">    .btn(<span class="preprocessor">#ddd);</span></div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>css:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="class">.con-enable-btn</span> <span class="rules">{
-    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#b72b25</span></span></span>;
-<span class="rule">}</span></span>
-<span class="class">.con-disable-btn</span> <span class="rules">{
-    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#ddd</span></span></span>;
-<span class="rule">}</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class">.con-enable-btn</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#b72b25</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.con-disable-btn</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#ddd</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
 
 <p>mixins还支持传入默认参数，如下：</p>
 <p>less:</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>.border(<span class="variable">@w</span><span class="symbol">:</span><span class="number">1</span>px,<span class="variable">@t</span><span class="symbol">:solid</span>,<span class="variable">@c</span><span class="symbol">:</span><span class="comment">#ccc) {</span>
-    <span class="symbol">border:</span> <span class="variable">@arguments</span>;
-}
-.detail-info {
-    .border(<span class="number">2</span>px,dashed,<span class="comment">#d8d8d8);</span>
-}
-</pre></td></tr></table></figure><br>css:<br><figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="class">.detail-info</span> <span class="rules">{
-     <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">2</span>px dashed <span class="hexcolor">#d8d8d8</span></span></span>;
- <span class="rule">}</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.border(<span class="variable">@w</span><span class="symbol">:</span><span class="number">1</span>px,<span class="variable">@t</span><span class="symbol">:solid</span>,<span class="variable">@c</span><span class="symbol">:</span><span class="comment">#ccc) {</span></div><div class="line">    <span class="symbol">border:</span> <span class="variable">@arguments</span>;</div><div class="line">}</div><div class="line">.detail-info {</div><div class="line">    .border(<span class="number">2</span>px,dashed,<span class="comment">#d8d8d8);</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>css:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class">.detail-info</span> <span class="rules">{</span></div><div class="line">     <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">2px</span> dashed <span class="hexcolor">#d8d8d8</span></span></span>;</div><div class="line"> <span class="rule">}</span></div></pre></td></tr></table></figure>
 
 <p>在项目中为了防止选择器重名的问题，可以利用命名空间：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="preprocessor">#amo {</span>
-    <span class="preprocessor">.head</span> {}
-}
-<span class="preprocessor">.page</span>-head {
-    <span class="preprocessor">#amo &gt; .head;</span>
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="input"><span class="prompt">#amo {</span></span></div><div class="line">    .head {}</div><div class="line">}</div><div class="line">.page-head {</div><div class="line">    #amo &gt; .head;</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <h4 id="3、嵌套">3、嵌套</h4>
 <p>嵌套规则很简单，如html本身的dom层次。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con-title"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con-artical"</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"javascript:void(0)"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con-title"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"con-artical"</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"javascript:void(0)"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>那么less可以这样编写：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="code"><pre>.con {
-    <span class="keyword">...</span>
-    .con-title {
-        <span class="keyword">...</span>
-    }
-    .con-artical {
-        <span class="keyword">...</span>
-        a {
-            <span class="keyword">...</span>
-            &:hover { //&表示该元素如果没有&表示后代元素
-                <span class="keyword">...</span>
-            }
-        }
-    }
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">.con {</div><div class="line">    <span class="keyword">...</span></div><div class="line">    .con-title {</div><div class="line">        <span class="keyword">...</span></div><div class="line">    }</div><div class="line">    .con-artical {</div><div class="line">        <span class="keyword">...</span></div><div class="line">        a {</div><div class="line">            <span class="keyword">...</span></div><div class="line">            &:hover { //&表示该元素如果没有&表示后代元素</div><div class="line">                <span class="keyword">...</span></div><div class="line">            }</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <h4 id="4、运算和函数">4、运算和函数</h4>
 <p>以按钮的hover为例：</p>
 <p>less:</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre><span class="at_rule">@<span class="keyword">color:</span> #<span class="number">80</span>e619</span>;
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="at_rule">@<span class="keyword">color:</span> #<span class="number">80</span>e619</span>;</div><div class="line"></div><div class="line"><span class="class">.btn</span>(<span class="at_rule">@<span class="keyword">color)</span> </span>{</div><div class="line">    <span class="tag">background-color</span>: <span class="at_rule">@<span class="keyword">color;</span></span></div><div class="line">}</div><div class="line"></div><div class="line">.enable-btn {</div><div class="line">    <span class="class">.btn</span>(<span class="at_rule">@<span class="keyword">color);</span></span></div><div class="line">    &:hover { </div><div class="line">        <span class="class">.btn</span>(<span class="tag">darken</span>(<span class="at_rule">@<span class="keyword">color,</span> <span class="number">20%</span>))</span>;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
 
-<span class="class">.btn</span>(<span class="at_rule">@<span class="keyword">color)</span> </span>{
-    <span class="tag">background-color</span>: <span class="at_rule">@<span class="keyword">color;</span>
-}
-
-.enable-btn </span>{
-    <span class="class">.btn</span>(<span class="at_rule">@<span class="keyword">color);</span>
-    &:hover </span>{ 
-        <span class="class">.btn</span>(<span class="tag">darken</span>(<span class="at_rule">@<span class="keyword">color,</span> <span class="number">20</span>%))</span>;
-    }
-}
-</pre></td></tr></table></figure><br>css:<br><figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="class">.enable-btn</span> <span class="rules">{
-    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#80e619</span></span></span>;
-<span class="rule">}</span></span>
-<span class="class">.enable-btn</span><span class="pseudo">:hover</span> <span class="rules">{
-    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#4d8a0f</span></span></span>;
-<span class="rule">}</span></span>
-</pre></td></tr></table></figure>
+<p>css:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class">.enable-btn</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#80e619</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.enable-btn</span><span class="pseudo">:hover</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#4d8a0f</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
 
 <p>这样很简单的就实现了鼠标hover到按钮上背景色变暗的效果。</p>
 <p>更多功能可以参考<a href="http://lesscss.org/functions/#functions-overview" target="_blank" rel="external">function api</a></p>
@@ -716,267 +510,57 @@ lessc -x test.less &gt; test.css
 <ul>
 <li>圆角</li>
 </ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="built_in">.</span>border<span class="attribute">-radius</span> (@radius: <span class="number">5</span>px) {
-    <span class="attribute">-webkit</span><span class="attribute">-border</span><span class="attribute">-radius</span>: @radius;
-	<span class="attribute">-moz</span><span class="attribute">-border</span><span class="attribute">-radius</span>: @radius;
-	border<span class="attribute">-radius</span>: @radius;
-}
-
-<span class="built_in">.</span>test<span class="attribute">-div</span> {
-    <span class="built_in">.</span>border<span class="attribute">-radius</span>(<span class="number">20</span>px);
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class">.border-radius</span> (<span class="at_rule">@radius:<span class="preprocessor"> 5px</span>) {</span></div><div class="line">    -webkit-<span class="attribute">border-radius</span><span class="value">: @radius;</span></div><div class="line">	-moz-<span class="attribute">border-radius</span><span class="value">: @radius;</span></div><div class="line">	<span class="attribute">border-radius</span><span class="value">: @radius;</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="class">.test-div</span> {</div><div class="line">    <span class="class">.border-radius</span>(20px);</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <ul>
 <li>四个角可自由定制角度</li>
 </ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre>.border-radius-custom (<span class="variable">@topleft</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@topright</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@bottomleft</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@bottomright</span><span class="symbol">:</span> <span class="number">5</span>px) {
-    -webkit-border-<span class="symbol">radius:</span> <span class="variable">@topleft</span> <span class="variable">@topright</span> <span class="variable">@bottomright</span> <span class="variable">@bottomleft</span>;
-    -moz-border-<span class="symbol">radius:</span> <span class="variable">@topleft</span> <span class="variable">@topright</span> <span class="variable">@bottomright</span> <span class="variable">@bottomleft</span>;
-    border-<span class="symbol">radius:</span> <span class="variable">@topleft</span> <span class="variable">@topright</span> <span class="variable">@bottomright</span> <span class="variable">@bottomleft</span>;
-}
-
-.test-div {
-    .border-radius-custom(<span class="number">20</span>px, <span class="number">20</span>px, 0px, 0px);
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.border-radius-custom (<span class="variable">@topleft</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@topright</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@bottomleft</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@bottomright</span><span class="symbol">:</span> <span class="number">5</span>px) {</div><div class="line">    -webkit-border-<span class="symbol">radius:</span> <span class="variable">@topleft</span> <span class="variable">@topright</span> <span class="variable">@bottomright</span> <span class="variable">@bottomleft</span>;</div><div class="line">    -moz-border-<span class="symbol">radius:</span> <span class="variable">@topleft</span> <span class="variable">@topright</span> <span class="variable">@bottomright</span> <span class="variable">@bottomleft</span>;</div><div class="line">    border-<span class="symbol">radius:</span> <span class="variable">@topleft</span> <span class="variable">@topright</span> <span class="variable">@bottomright</span> <span class="variable">@bottomleft</span>;</div><div class="line">}</div><div class="line"></div><div class="line">.test-div {</div><div class="line">    .border-radius-custom(<span class="number">20</span>px, <span class="number">20</span>px, 0px, 0px);</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <ul>
 <li>阴影</li>
 </ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre>.box-shadow (<span class="variable">@x</span><span class="symbol">:</span> 0px, <span class="variable">@y</span><span class="symbol">:</span> <span class="number">3</span>px, <span class="variable">@blur</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@alpha</span><span class="symbol">:</span> <span class="number">0</span>.<span class="number">5</span>) {
--webkit-box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span class="variable">@y</span> <span class="variable">@blur</span> rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="variable">@alpha</span>);
--moz-box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span class="variable">@y</span> <span class="variable">@blur</span> rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="variable">@alpha</span>);
-box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span class="variable">@y</span> <span class="variable">@blur</span> rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="variable">@alpha</span>);
-}
-
-.test-div {
-.box-shadow(<span class="number">5</span>px, <span class="number">5</span>px, <span class="number">6</span>px, <span class="number">0</span>.<span class="number">3</span>);
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">    .box-shadow (<span class="variable">@x</span><span class="symbol">:</span> 0px, <span class="variable">@y</span><span class="symbol">:</span> <span class="number">3</span>px, <span class="variable">@blur</span><span class="symbol">:</span> <span class="number">5</span>px, <span class="variable">@alpha</span><span class="symbol">:</span> <span class="number">0</span>.<span class="number">5</span>) {</div><div class="line">    -webkit-box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span class="variable">@y</span> <span class="variable">@blur</span> rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="variable">@alpha</span>);</div><div class="line">    -moz-box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span class="variable">@y</span> <span class="variable">@blur</span> rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="variable">@alpha</span>);</div><div class="line">    box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span class="variable">@y</span> <span class="variable">@blur</span> rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="variable">@alpha</span>);</div><div class="line">}</div><div class="line"></div><div class="line">.test-div {</div><div class="line">    .box-shadow(<span class="number">5</span>px, <span class="number">5</span>px, <span class="number">6</span>px, <span class="number">0</span>.<span class="number">3</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <ul>
 <li>元素过渡效果</li>
 </ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre>.transition (@prop: all, @time: 1s, @ease: linear) {
-    -<span class="ruby">webkit-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;
-</span>    -<span class="ruby">moz-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;
-</span>    -<span class="ruby">o-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;
-</span>    -<span class="ruby">ms-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;
-</span>    transition: @prop @time @ease;
-}
-
-.test-div {
-    .transition(all, 0.5s, ease-in);
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.transition (@prop: all, @time: 1s, @ease: linear) {</div><div class="line">    -<span class="ruby">webkit-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;</span></div><div class="line">    -<span class="ruby">moz-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;</span></div><div class="line">    -<span class="ruby">o-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;</span></div><div class="line">    -<span class="ruby">ms-<span class="symbol">transition:</span> <span class="variable">@prop</span> <span class="variable">@time</span> <span class="variable">@ease</span>;</span></div><div class="line">    transition: @prop @time @ease;</div><div class="line">}</div><div class="line"></div><div class="line">.test-div {</div><div class="line">    .transition(all, 0.5s, ease-in);</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <ul>
 <li>旋转</li>
 </ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre>.transform (<span class="variable">@rotate</span>: <span class="number">90</span>deg, <span class="variable">@scale</span>: <span class="number">1</span>, <span class="variable">@skew</span>: <span class="number">1</span>deg, <span class="variable">@translate</span>: <span class="number">10</span>px) {
-    -webkit-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);
-    -moz-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);
-    -o-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);
-    -ms-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);
-    transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);
-}
-
-.test-div {
-    .transform(<span class="number">5</span>deg, <span class="number">0.5</span>, <span class="number">1</span>deg, <span class="number">0</span>px);
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.transform (<span class="variable">@rotate</span>: <span class="number">90</span>deg, <span class="variable">@scale</span>: <span class="number">1</span>, <span class="variable">@skew</span>: <span class="number">1</span>deg, <span class="variable">@translate</span>: <span class="number">10</span>px) {</div><div class="line">    -webkit-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);</div><div class="line">    -moz-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);</div><div class="line">    -o-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);</div><div class="line">    -ms-transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);</div><div class="line">    transform: <span class="keyword">rotate</span>(<span class="variable">@rotate</span>) <span class="keyword">scale</span>(<span class="variable">@scale</span>) skew(<span class="variable">@skew</span>) translate(<span class="variable">@translate</span>);</div><div class="line">}</div><div class="line"></div><div class="line">.test-div {</div><div class="line">    .transform(<span class="number">5</span>deg, <span class="number">0.5</span>, <span class="number">1</span>deg, <span class="number">0</span>px);</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <ul>
 <li>颜色渐变</li>
 </ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td><td class="code"><pre><span class="comment">/*线性渐变*/</span>
-.gradient (<span class="variable">@origin</span>: left, <span class="variable">@start</span>: #ffffff, <span class="variable">@stop</span>: #<span class="number">000000</span>) {
-    background-<span class="keyword">color</span>: <span class="variable">@start</span>;
-    background-<span class="keyword">image</span>: -webkit-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);
-    background-<span class="keyword">image</span>: -moz-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);
-    background-<span class="keyword">image</span>: -o-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);
-    background-<span class="keyword">image</span>: -ms-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);
-    background-<span class="keyword">image</span>: linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);
-}
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*线性渐变*/</span></div><div class="line">.gradient (<span class="variable">@origin</span>: left, <span class="variable">@start</span>: #ffffff, <span class="variable">@stop</span>: #<span class="number">000000</span>) {</div><div class="line">    background-<span class="keyword">color</span>: <span class="variable">@start</span>;</div><div class="line">    background-<span class="keyword">image</span>: -webkit-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);</div><div class="line">    background-<span class="keyword">image</span>: -moz-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);</div><div class="line">    background-<span class="keyword">image</span>: -o-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);</div><div class="line">    background-<span class="keyword">image</span>: -ms-linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);</div><div class="line">    background-<span class="keyword">image</span>: linear-gradient(<span class="variable">@origin</span>, <span class="variable">@start</span>, <span class="variable">@stop</span>);</div><div class="line">}</div><div class="line"></div><div class="line">.test-div {</div><div class="line">    .gradient(left, #<span class="number">663333</span>, #<span class="number">333333</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
 
-.test-div {
-    .gradient(left, #<span class="number">663333</span>, #<span class="number">333333</span>);
-}
-</pre></td></tr></table></figure>
 
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td><td class="code"><pre><span class="comment">/*快速渐变*/</span>
-<span class="built_in">.</span>quick<span class="attribute">-gradient</span> (@origin: left, @alpha: <span class="number">0.2</span>) {
-    background<span class="attribute">-image</span>: <span class="attribute">-webkit</span><span class="attribute">-linear</span><span class="attribute">-gradient</span>(@origin, rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));
-    background<span class="attribute">-image</span>: <span class="attribute">-moz</span><span class="attribute">-linear</span><span class="attribute">-gradient</span>(@origin, rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));
-    background<span class="attribute">-image</span>: <span class="attribute">-o</span><span class="attribute">-linear</span><span class="attribute">-gradient</span>(@origin, rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));
-    background<span class="attribute">-image</span>: <span class="attribute">-ms</span><span class="attribute">-linear</span><span class="attribute">-gradient</span>(@origin, rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));
-    background<span class="attribute">-image</span>: linear<span class="attribute">-gradient</span>(@origin, rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));
-}
 
-<span class="built_in">.</span>test<span class="attribute">-div</span> {
-    background<span class="attribute">-color</span>: <span class="variable">#bada55</span>;
-    <span class="built_in">.</span>quick<span class="attribute">-gradient</span>(top, <span class="number">0.2</span>);
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*快速渐变*/</span></div><div class="line"><span class="class">.quick-gradient</span> (<span class="at_rule">@origin:<span class="preprocessor"> left</span>, @alpha:<span class="preprocessor"> 0.2</span>) {</span></div><div class="line">    <span class="attribute">background-image</span><span class="value">: <span class="function">-webkit-linear-gradient</span>(@origin, <span class="function">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), <span class="function">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));</span></div><div class="line">    <span class="attribute">background-image</span><span class="value">: <span class="function">-moz-linear-gradient</span>(@origin, <span class="function">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), <span class="function">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));</span></div><div class="line">    <span class="attribute">background-image</span><span class="value">: <span class="function">-o-linear-gradient</span>(@origin, <span class="function">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), <span class="function">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));</span></div><div class="line">    <span class="attribute">background-image</span><span class="value">: <span class="function">-ms-linear-gradient</span>(@origin, <span class="function">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), <span class="function">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));</span></div><div class="line">    <span class="attribute">background-image</span><span class="value">: <span class="function">linear-gradient</span>(@origin, <span class="function">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>), <span class="function">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,@alpha));</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="class">.test-div</span> {</div><div class="line">    <span class="attribute">background-color</span><span class="value">: <span class="hexcolor">#bada55</span>;</span></div><div class="line">    <span class="class">.quick-gradient</span>(<span class="attribute">top</span>, 0<span class="class">.2</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <ul>
 <li>镜像</li>
 </ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre><span class="built_in">.</span>reflect (@length: <span class="number">50</span><span class="subst">%</span>, @opacity: <span class="number">0.2</span>){
-    <span class="attribute">-webkit</span><span class="attribute">-box</span><span class="attribute">-reflect</span>: below <span class="number">0</span>px <span class="attribute">-webkit</span><span class="attribute">-gradient</span>(linear, left top, left bottom, from(transparent),
-    color<span class="attribute">-stop</span>(@length, transparent), <span class="keyword">to</span>(rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,@opacity)));
-}
-
-<span class="built_in">.</span>test<span class="attribute">-div</span> {
-    <span class="built_in">.</span>reflect(<span class="number">20</span><span class="subst">%</span>, <span class="number">0.2</span>);
-}
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">.reflect (<span class="variable">@length</span>: <span class="number">50</span><span class="variable">%,</span> <span class="variable">@opacity</span>: <span class="number">0.2</span>){</div><div class="line">    -webkit-box-reflect: below <span class="number">0</span>px -webkit-gradient(linear, left top, left bottom, from(transparent),</div><div class="line">    <span class="keyword">color</span>-stop(<span class="variable">@length</span>, transparent), to(rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="variable">@opacity</span>)));</div><div class="line">}</div><div class="line"></div><div class="line">.test-div {</div><div class="line">    .reflect(<span class="number">20</span><span class="variable">%,</span> <span class="number">0.2</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <ul>
 <li>颜色</li>
 </ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre><span class="comment">/*互补色*/</span>
-<span class="at_rule">@<span class="keyword">base:</span> #<span class="number">663333</span></span>;
-<span class="at_rule">@<span class="keyword">complement1:</span> <span class="function">spin(@base, <span class="number">180</span>)</span></span>;
-<span class="at_rule">@<span class="keyword">complement2:</span> <span class="function">darken(<span class="function">spin(@base, <span class="number">180</span>)</span>, <span class="number">5</span>%)</span></span>;
-<span class="at_rule">@<span class="keyword">lighten1:</span> <span class="function">lighten(@base, <span class="number">15</span>%)</span></span>;
-<span class="at_rule">@<span class="keyword">lighten2:</span> <span class="function">lighten(@base, <span class="number">30</span>%)</span></span>;
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*互补色*/</span></div><div class="line"><span class="at_rule">@<span class="keyword">base:</span> #<span class="number">663333</span></span>;</div><div class="line"><span class="at_rule">@<span class="keyword">complement1:</span> <span class="function">spin</span>(@base, <span class="number">180</span>)</span>;</div><div class="line"><span class="at_rule">@<span class="keyword">complement2:</span> <span class="function">darken</span>(<span class="function">spin</span>(@base, <span class="number">180</span>), <span class="number">5%</span>)</span>;</div><div class="line"><span class="at_rule">@<span class="keyword">lighten1:</span> <span class="function">lighten</span>(@base, <span class="number">15%</span>)</span>;</div><div class="line"><span class="at_rule">@<span class="keyword">lighten2:</span> <span class="function">lighten</span>(@base, <span class="number">30%</span>)</span>;</div><div class="line"></div><div class="line"><span class="class">.one</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @base</span></span>;<span class="rule">}</span></span></div><div class="line"><span class="class">.two</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @complement1</span></span>;<span class="rule">}</span></span></div><div class="line"><span class="class">.three</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @complement2</span></span>;<span class="rule">}</span></span></div><div class="line"><span class="class">.four</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighten1</span></span>;<span class="rule">}</span></span></div><div class="line"><span class="class">.five</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighten2</span></span>;<span class="rule">}</span></span></div></pre></td></tr></table></figure>
 
-<span class="class">.one</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @base</span></span>;<span class="rule">}</span></span>
-<span class="class">.two</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @complement1</span></span>;<span class="rule">}</span></span>
-<span class="class">.three</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @complement2</span></span>;<span class="rule">}</span></span>
-<span class="class">.four</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighten1</span></span>;<span class="rule">}</span></span>
-<span class="class">.five</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighten2</span></span>;<span class="rule">}</span></span>
-</pre></td></tr></table></figure>
 
-<figure class="highlight less"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre><span class="comment">/*颜色微调*/</span>
-<span class="at_rule">@<span class="keyword">base:</span> #<span class="number">663333</span></span>;
-<span class="at_rule">@<span class="keyword">lighter1:</span> <span class="function">lighten(<span class="function">spin(@base, <span class="number">5</span>)</span>, <span class="number">10</span>%)</span></span>;
-<span class="at_rule">@<span class="keyword">lighter2:</span> <span class="function">lighten(<span class="function">spin(@base, <span class="number">10</span>)</span>, <span class="number">20</span>%)</span></span>;
-<span class="at_rule">@<span class="keyword">darker1:</span> <span class="function">darken(<span class="function">spin(@base, -<span class="number">5</span>)</span>, <span class="number">10</span>%)</span></span>;
-<span class="at_rule">@<span class="keyword">darker2:</span> <span class="function">darken(<span class="function">spin(@base, -<span class="number">10</span>)</span>, <span class="number">20</span>%)</span></span>;
 
-<span class="class">.one</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @base</span></span>;<span class="rule">}</span></span>
-<span class="class">.two</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighter1</span></span>;<span class="rule">}</span></span>
-<span class="class">.three</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighter2</span></span>;<span class="rule">}</span></span>
-<span class="class">.four</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @darker1</span></span>;<span class="rule">}</span></span>
-<span class="class">.five</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @darker2</span></span>;<span class="rule">}</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*颜色微调*/</span></div><div class="line"><span class="at_rule">@<span class="keyword">base:</span> #<span class="number">663333</span></span>;</div><div class="line"><span class="at_rule">@<span class="keyword">lighter1:</span> <span class="function">lighten</span>(<span class="function">spin</span>(@base, <span class="number">5</span>), <span class="number">10%</span>)</span>;</div><div class="line"><span class="at_rule">@<span class="keyword">lighter2:</span> <span class="function">lighten</span>(<span class="function">spin</span>(@base, <span class="number">10</span>), <span class="number">20%</span>)</span>;</div><div class="line"><span class="at_rule">@<span class="keyword">darker1:</span> <span class="function">darken</span>(<span class="function">spin</span>(@base, -<span class="number">5</span>), <span class="number">10%</span>)</span>;</div><div class="line"><span class="at_rule">@<span class="keyword">darker2:</span> <span class="function">darken</span>(<span class="function">spin</span>(@base, -<span class="number">10</span>), <span class="number">20%</span>)</span>;</div><div class="line"></div><div class="line"><span class="class">.one</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @base</span></span>;<span class="rule">}</span></span></div><div class="line"><span class="class">.two</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighter1</span></span>;<span class="rule">}</span></span></div><div class="line"><span class="class">.three</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @lighter2</span></span>;<span class="rule">}</span></span></div><div class="line"><span class="class">.four</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @darker1</span></span>;<span class="rule">}</span></span></div><div class="line"><span class="class">.five</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> @darker2</span></span>;<span class="rule">}</span></span></div></pre></td></tr></table></figure>
 
 <p>也可以参考<br><a href="https://github.com/zzyss86/LESS-CSS3/blob/master/css3.less" target="_blank" rel="external">css3预处理工具</a><br><a href="https://github.com/dmitryf/elements" target="_blank" rel="external">useful mixins</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/07/15/less/" data-id="9inb3he8utn6oj88" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/07/15/less/" data-id="m7btvlwd2pagqen7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less-css/">less css</a></li></ul>
@@ -1014,9 +598,7 @@ box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span c
 <p>最初，console是firebug提供的一个内置对象，它可以用于我们跟踪调试在网页加载过程中的各类信息。</p>
 <p>那么我们首先来看下它的基本用法。</p>
 <h3 id="一、基本用法">一、基本用法</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>console.log(<span class="string">"log info"</span>);
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(<span class="string">"log info"</span>);</div></pre></td></tr></table></figure>
 
 <p>根据信息的不同性质，console对象还有4种显示信息的方法，分别是：</p>
 <ul>
@@ -1029,9 +611,7 @@ box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span c
 <h3 id="二、格式化输出">二、格式化输出</h3>
 <p>console对象支持类似于C语言printf占位符写法的输出，一些复杂的输出利用这种方法可以让结构更加的清晰。</p>
 <p>先看一个例子:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>console.log(<span class="string">'%d + %d = %d'</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>);
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(<span class="string">'%d + %d = %d'</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>);</div></pre></td></tr></table></figure>
 
 <p><img src="/css/images/console_1.jpg" alt=""></p>
 <p>console支持的占位符格式有如下几种：</p>
@@ -1048,215 +628,60 @@ box-<span class="symbol">shadow:</span> <span class="variable">@x</span> <span c
 </li>
 </ul>
 <p>下面我们来看几个例子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>//chrome中
-console.log(<span class="string">"%O"</span>,  document.body);
-console.log(<span class="string">"%o"</span>,  document.body);
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//chrome中</div><div class="line">console.log(<span class="string">"%O"</span>,  document.body);</div><div class="line">console.log(<span class="string">"%o"</span>,  document.body);</div></pre></td></tr></table></figure>
 
 <p><img src="/css/images/console_2.jpg" alt=""></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>console.log(<span class="string">"%c%s %chas %d fingers"</span>, <span class="string">"color:green;text-shadow:1px 1px 1px rgba(0,0,0,.2); font-size: 16pt"</span>, <span class="string">"amo"</span>, <span class="string">"color: #333333; font-size: 16pt"</span>, <span class="number">10</span>);
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(<span class="string">"%c%s %chas %d fingers"</span>, <span class="string">"color:green;text-shadow:1px 1px 1px rgba(0,0,0,.2); font-size: 16pt"</span>, <span class="string">"amo"</span>, <span class="string">"color: #333333; font-size: 16pt"</span>, <span class="number">10</span>);</div></pre></td></tr></table></figure>
 
 <p><img src="/css/images/console_3.jpg" alt=""></p>
 <p>原来在控制台里还可以进行样式的控制，是不是很有趣？<strong>但是对于IE并不支持样式，所以注意哦</strong>既然可以加样式，自然而然就会问，那能不能进行图片的输出呢，答案是否定的（firefox提供console.image插件），可是我们可以通过背景图的方式来进行图片的输出。只是这里的图片大小需要通过padding和line-height来控制。用的时候请谨慎调节(chrome下生效)。</p>
 <p>看个例子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>//chrome
-console.log(<span class="string">"%c"</span>, <span class="string">"padding: 80px 100px;height:1px; background:url(http://p1.gexing.com/G1/M00/24/A6/rBACFFH2hjPAQgmdAAAVighCO6A353_200x200_3.jpg);line-height:200px"</span>);
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//chrome</div><div class="line">console.log(<span class="string">"%c"</span>, <span class="string">"padding: 80px 100px;height:1px; background:url(http://p1.gexing.com/G1/M00/24/A6/rBACFFH2hjPAQgmdAAAVighCO6A353_200x200_3.jpg);line-height:200px"</span>);</div></pre></td></tr></table></figure>
 
 <p><img src="/css/images/console_4.jpg" alt=""></p>
 <h3 id="三、分组输出">三、分组输出</h3>
 <p>如果需要打印较多的信息，可以利用分组输出进行结构化的管理。console.group()定义组的开始，console.groupEnd()定义组的结束。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre>console.group(<span class="string">"amo"</span>);
-console.log(<span class="string">"a's hand"</span>);
-console.log(<span class="string">"a's work"</span>);
-console.groupEnd();
-
-console.group(<span class="string">"zicheng"</span>);
-console.log(<span class="string">"z's hand"</span>);
-console.log(<span class="string">"z's work"</span>);
-console.groupEnd();
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">console.group(<span class="string">"amo"</span>);</div><div class="line">console.log(<span class="string">"a's hand"</span>);</div><div class="line">console.log(<span class="string">"a's work"</span>);</div><div class="line">console.groupEnd();</div><div class="line"></div><div class="line">console.group(<span class="string">"zicheng"</span>);</div><div class="line">console.log(<span class="string">"z's hand"</span>);</div><div class="line">console.log(<span class="string">"z's work"</span>);</div><div class="line">console.groupEnd();</div></pre></td></tr></table></figure>
 
 <p><img src="/css/images/console_5.jpg" alt=""></p>
 <h3 id="四、其他用法">四、其他用法</h3>
 <ul>
 <li>console.dir()显示一个对象所有的属性和方法</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>var cat = {<span class="string">"eyes"</span>: <span class="number">2</span>, <span class="string">"ears"</span>: <span class="number">2</span>, <span class="string">"sayHi"</span>: <span class="function"><span class="title">function</span></span>(){ <span class="keyword">return</span> <span class="string">"miao~"</span>; }};
-console.dir(cat);
-</pre></td></tr></table></figure><br><img src="/css/images/console_6.jpg" alt=""><br><br>- console.trace()追踪函数调用时的栈信息<br><br>- 计时功能<br><br>console.time()和console.timeEnd()，利用它们分别在代码执行开始和结束时打上标识，以用来显示代码的运行时间。<br><br><figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>console.time(<span class="string">"for"</span>);
-<span class="keyword">for</span>(var i=<span class="number">0</span>;i&lt;<span class="number">1000</span>;i++){
-    <span class="keyword">for</span>(var j=<span class="number">0</span>;j&lt;<span class="number">1000</span>;j++){}
-}
-console.timeEnd(<span class="string">"for"</span>); //<span class="keyword">for</span>: <span class="number">3.000</span>ms
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var cat = {<span class="string">"eyes"</span>: <span class="number">2</span>, <span class="string">"ears"</span>: <span class="number">2</span>, <span class="string">"sayHi"</span>: <span class="function"><span class="title">function</span></span>(){ <span class="keyword">return</span> <span class="string">"miao~"</span>; }};</div><div class="line">console.dir(cat);</div></pre></td></tr></table></figure>
+
+<p><img src="/css/images/console_6.jpg" alt=""></p>
+<ul>
+<li><p>console.trace()追踪函数调用时的栈信息</p>
+</li>
+<li><p>计时功能</p>
+</li>
+</ul>
+<p>console.time()和console.timeEnd()，利用它们分别在代码执行开始和结束时打上标识，以用来显示代码的运行时间。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">console.time(<span class="string">"for"</span>);</div><div class="line"><span class="keyword">for</span>(var i=<span class="number">0</span>;i&lt;<span class="number">1000</span>;i++){</div><div class="line">    <span class="keyword">for</span>(var j=<span class="number">0</span>;j&lt;<span class="number">1000</span>;j++){}</div><div class="line">}</div><div class="line">console.timeEnd(<span class="string">"for"</span>); //<span class="keyword">for</span>: <span class="number">3.000</span>ms</div></pre></td></tr></table></figure>
 
 <ul>
 <li>计数器</li>
 </ul>
 <p>console.count()，用于记录函数被调用的次数统计，在某些复杂场景的调试中很有用。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>function login(user) {
-    console.count(<span class="string">"Login called for user '"</span> +  user + <span class="string">"'"</span>);
-}
-login(<span class="string">"amo"</span>); //Login called <span class="keyword">for</span> user <span class="string">'amo'</span>: <span class="number">1</span>
-login(<span class="string">"zicheng"</span>); //Login called <span class="keyword">for</span> user <span class="string">'zicheng'</span>: <span class="number">1</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function login(user) {</div><div class="line">    console.count(<span class="string">"Login called for user '"</span> +  user + <span class="string">"'"</span>);</div><div class="line">}</div><div class="line">login(<span class="string">"amo"</span>); //Login called <span class="keyword">for</span> user <span class="string">'amo'</span>: <span class="number">1</span></div><div class="line">login(<span class="string">"zicheng"</span>); //Login called <span class="keyword">for</span> user <span class="string">'zicheng'</span>: <span class="number">1</span></div></pre></td></tr></table></figure>
 
 <ul>
 <li>性能分析</li>
 </ul>
 <p>console.profile()，可以帮助我们进行性能分析，找出瓶颈。（firefox有效）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="code"><pre>function <span class="function"><span class="title">Foo</span></span>(){
-    <span class="keyword">for</span>(var i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++){
-        funcA(<span class="number">1000</span>);
-    }
-    funcB(<span class="number">10000</span>);
-}
-function funcA(count){
-　　 <span class="keyword">for</span>(var i=<span class="number">0</span>;i&lt;count;i++){}
-}
-function funcB(count){
- 　　<span class="keyword">for</span>(var i=<span class="number">0</span>;i&lt;count;i++){}
-}
-console.profile(<span class="string">'profile'</span>);
-Foo();
-console.profileEnd();
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function <span class="function"><span class="title">Foo</span></span>(){</div><div class="line">    <span class="keyword">for</span>(var i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++){</div><div class="line">        funcA(<span class="number">1000</span>);</div><div class="line">    }</div><div class="line">    funcB(<span class="number">10000</span>);</div><div class="line">}</div><div class="line">function funcA(count){</div><div class="line">　　 <span class="keyword">for</span>(var i=<span class="number">0</span>;i&lt;count;i++){}</div><div class="line">}</div><div class="line">function funcB(count){</div><div class="line"> 　　<span class="keyword">for</span>(var i=<span class="number">0</span>;i&lt;count;i++){}</div><div class="line">}</div><div class="line">console.profile(<span class="string">'profile'</span>);</div><div class="line">Foo();</div><div class="line">console.profileEnd();</div></pre></td></tr></table></figure>
 
 <p><img src="/css/images/console_7.jpg" alt=""></p>
 <p>由上图可以看到各个函数执行的情况。</p>
 <ul>
-<li><p>清空所有调试信息</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>console.clear();
-</pre></td></tr></table></figure>
-
-</li>
+<li>清空所有调试信息</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.clear();</div></pre></td></tr></table></figure>
+
 <h3 id="需要注意的是浏览器兼容性">需要注意的是浏览器兼容性</h3>
 <p>对于IE较老版本，或者是某些属性，并不是所有浏览器都兼容的，所以调试信息请尽量在开发时使用，并不要带到线上。但是我们也看到有些网站会将招聘信息通过console.log()的方式输出到控制台中，这个时候就要注意做好兼容。以下为腾讯所做的处理，仅供参考。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-</pre></td><td class="code"><pre>(<span class="function"><span class="title">function</span></span>(){
-    <span class="keyword">if</span>(!console || !console.log){
-        <span class="keyword">return</span>;
-    }
-    var toFixedVersion = function(ver, floatLength){
-        ver= (<span class="string">""</span>+ver).replace(/_/g,<span class="string">"."</span>);
-        floatLength = floatLength || <span class="number">1</span>;
-        ver = String(ver).split(<span class="string">"."</span>);
-        ver = ver[<span class="number">0</span>] + <span class="string">"."</span> + (ver[<span class="number">1</span>] || <span class="string">"0"</span>);
-        ver = Number(ver).toFixed(floatLength);
-        <span class="keyword">return</span> ver;
-    };
-    var ua = navigator.userAgent.toLowerCase(),
-    browserName,
-    browserVer,
-    s;
-    var <span class="keyword">set</span>Ver = function(name, ver){
-        browserName = name;
-        browserVer = ver;
-    };
-    (s = ua.match(/chrome\/([\d]+)/)) ? <span class="keyword">set</span>Ver(<span class="string">"chrome"</span>,toFixedVersion(s[<span class="number">1</span>])) : <span class="number">0</span>;
-    var isSupport = (browserName === <span class="string">'chrome'</span> && browserVer &gt;= <span class="number">25</span>);
-    <span class="keyword">if</span>(isSupport){
-        var imgList = [];
-        <span class="keyword">for</span>(var i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++){
-            imgList.push(<span class="string">'padding:49px 55.5px;line-height:111px;background:url(http://codestar.alloyteam.com/1/style/image/beauty'</span> + (i+<span class="number">1</span>) +   <span class="string">'.jpg) no-repeat;'</span>);
-        }
-        console.log(<span class="string">'%c云云无情，腾腾有爱'</span>, <span class="string">'font-size:18px;text-shadow: rgb(153, 153, 153) 2px 2px 2px;font-weight:bold;line-height:1.8;font  -family:"微软雅黑"'</span>);
-        console.log(<span class="string">'%c'</span>, imgList[Math.round(Math.random()*(imgList.length-<span class="number">1</span>))]);
-        console.log(<span class="string">'%c如果你没有100个“往来”好友，那就来腾讯领红包吧！红包精彩，腾讯更精彩！'</span>, <span class="string">'color:#08c;'</span>);
-        console.log(<span class="string">'http://www.ipresst.com/jointencent'</span>);
-        console.log(<span class="string">'\n-------------华丽的分割线-------------\n'</span>);
-        console.log(<span class="string">'%c【前端特工】\n“据内线消息，TX公司将于近期推出一个新的HTML5重磅产品。\n公司担心该产品会带来威胁，特命你潜入TX，探查底细  ……”\nhttp://codestar.alloyteam.com\n\n'</span>, <span class="string">'line-height:1.8;'</span>);
-    } <span class="keyword">else</span> {
-        console.log(<span class="string">'【云云无情，腾腾有爱】\n如果你没有100个“往来”好友，那就来腾讯领红包吧！红包精彩，腾讯更精彩！\nhttp://www.ipresst.com/jo  intencent'</span>);
-        console.log(<span class="string">'\n-------------华丽的分割线-------------\n'</span>);
-        console.log(<span class="string">'【前端特工】\n“据内线消息，TX公司将于近期推出一个新的HTML5重磅产品。\n公司担心该产品会带来威胁，特命你潜入TX，探查底细……  ”\nhttp://codestar.alloyteam.com\n\n'</span>);
-    }
-})();
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="title">function</span></span>(){</div><div class="line">    <span class="keyword">if</span>(!console || !console.log){</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    }</div><div class="line">    var toFixedVersion = function(ver, floatLength){</div><div class="line">        ver= (<span class="string">""</span>+ver).replace(/_/g,<span class="string">"."</span>);</div><div class="line">        floatLength = floatLength || <span class="number">1</span>;</div><div class="line">        ver = String(ver).split(<span class="string">"."</span>);</div><div class="line">        ver = ver[<span class="number">0</span>] + <span class="string">"."</span> + (ver[<span class="number">1</span>] || <span class="string">"0"</span>);</div><div class="line">        ver = Number(ver).toFixed(floatLength);</div><div class="line">        <span class="keyword">return</span> ver;</div><div class="line">    };</div><div class="line">    var ua = navigator.userAgent.toLowerCase(),</div><div class="line">    browserName,</div><div class="line">    browserVer,</div><div class="line">    s;</div><div class="line">    var <span class="keyword">set</span>Ver = function(name, ver){</div><div class="line">        browserName = name;</div><div class="line">        browserVer = ver;</div><div class="line">    };</div><div class="line">    (s = ua.match(/chrome\/([\d]+)/)) ? <span class="keyword">set</span>Ver(<span class="string">"chrome"</span>,toFixedVersion(s[<span class="number">1</span>])) : <span class="number">0</span>;</div><div class="line">    var isSupport = (browserName === <span class="string">'chrome'</span> && browserVer &gt;= <span class="number">25</span>);</div><div class="line">    <span class="keyword">if</span>(isSupport){</div><div class="line">        var imgList = [];</div><div class="line">        <span class="keyword">for</span>(var i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++){</div><div class="line">            imgList.push(<span class="string">'padding:49px 55.5px;line-height:111px;background:url(http://codestar.alloyteam.com/1/style/image/beauty'</span> + (i+<span class="number">1</span>) +   <span class="string">'.jpg) no-repeat;'</span>);</div><div class="line">        }</div><div class="line">        console.log(<span class="string">'%c云云无情，腾腾有爱'</span>, <span class="string">'font-size:18px;text-shadow: rgb(153, 153, 153) 2px 2px 2px;font-weight:bold;line-height:1.8;font  -family:"微软雅黑"'</span>);</div><div class="line">        console.log(<span class="string">'%c'</span>, imgList[Math.round(Math.random()*(imgList.length-<span class="number">1</span>))]);</div><div class="line">        console.log(<span class="string">'%c如果你没有100个“往来”好友，那就来腾讯领红包吧！红包精彩，腾讯更精彩！'</span>, <span class="string">'color:#08c;'</span>);</div><div class="line">        console.log(<span class="string">'http://www.ipresst.com/jointencent'</span>);</div><div class="line">        console.log(<span class="string">'\n-------------华丽的分割线-------------\n'</span>);</div><div class="line">        console.log(<span class="string">'%c【前端特工】\n“据内线消息，TX公司将于近期推出一个新的HTML5重磅产品。\n公司担心该产品会带来威胁，特命你潜入TX，探查底细  ……”\nhttp://codestar.alloyteam.com\n\n'</span>, <span class="string">'line-height:1.8;'</span>);</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        console.log(<span class="string">'【云云无情，腾腾有爱】\n如果你没有100个“往来”好友，那就来腾讯领红包吧！红包精彩，腾讯更精彩！\nhttp://www.ipresst.com/jo  intencent'</span>);</div><div class="line">        console.log(<span class="string">'\n-------------华丽的分割线-------------\n'</span>);</div><div class="line">        console.log(<span class="string">'【前端特工】\n“据内线消息，TX公司将于近期推出一个新的HTML5重磅产品。\n公司担心该产品会带来威胁，特命你潜入TX，探查底细……  ”\nhttp://codestar.alloyteam.com\n\n'</span>);</div><div class="line">    }</div><div class="line">})();</div></pre></td></tr></table></figure>
 
 <h3 id="参考资料">参考资料</h3>
 <p><a href="https://developers.google.com/chrome-developer-tools/docs/console-api" target="_blank" rel="external">console-api</a></p>
@@ -1264,7 +689,7 @@ console.profileEnd();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/07/04/console/" data-id="wucaf829sx6tyrz3" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/07/04/console/" data-id="sgmiv8xuvgjyx1wd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1368,9 +793,7 @@ console.profileEnd();
 <h4 id="1、设置Domain">1、设置Domain</h4>
 <p>页面可以改变本身的源，但会受到一些限制。脚本可以设置document.domain 的值为当前域的一个后缀</p>
 <p>在同源策略中有一个例外，脚本可以设置 document.domain 的值为当前域的一个后缀，如果这样做的话，短的域将作为后续同源检测的依据。例如，假设在 <a href="http://b.a.com/page/a.html" target="_blank" rel="external">http://b.a.com/page/a.html</a> 中的一个脚本执行了下列语句：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>document.domain = <span class="string">"a.com"</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.domain = <span class="string">"a.com"</span></div></pre></td></tr></table></figure>
 
 <p>这条语句执行之后，页面将会成功地通过对 <a href="http://a.com/page/a.html" target="_blank" rel="external">http://a.com/page/a.html</a> 的同源检测。而同理，a.com 不能设置 document.domain 为 b.com.</p>
 <p>浏览器单独保存端口号。任何的赋值操作，包括document.domain = documen.domain都会以null值覆盖掉原来的端口号。因此a.com:8080页面的脚本不能仅通过设置document.domain = “a.com”就能与company.com通信。赋值时必须带上端口号，以确保端口号不会为null。</p>
@@ -1379,28 +802,16 @@ console.profileEnd();
 <li><p>举个例子</p>
 <p>  a.taobao.com嵌入一个b.taobao.com的页面，并且需要做高度自适应，那么可以这么来做：</p>
 <ul>
-<li><p>在a页面中设置domain并定义autoHeight方法（用处为改变iframe的高度）</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>document.domain = <span class="string">"taobao.com"</span>
-</pre></td></tr></table></figure>
+<li>在a页面中设置domain并定义autoHeight方法（用处为改变iframe的高度）</li>
+</ul>
 </li>
-<li><p>在b页面,页面加载之后或者所有涉及到高度变化的事件中，调用a页面的方法：</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>function <span class="function"><span class="title">fixHeight</span></span>(){
-	document.domain = <span class="string">'taobao.com'</span>;
-	var oHeight = document.documentElement.scrollHeight;
-	window.parent.autoHeight(oHeight); //调用a页面的autoHeight方法，在该方法中去改变iframe的高度
-}
-</pre></td></tr></table></figure>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.domain = <span class="string">"taobao.com"</span></div></pre></td></tr></table></figure>
 
-</li>
-</ul>
-</li>
-</ul>
+
+<pre><code><span class="deletion">- 在b页面,页面加载之后或者所有涉及到高度变化的事件中，调用a页面的方法：</span>
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function <span class="function"><span class="title">fixHeight</span></span>(){</div><div class="line">	document.domain = <span class="string">'taobao.com'</span>;</div><div class="line">	var oHeight = document.documentElement.scrollHeight;</div><div class="line">	window.parent.autoHeight(oHeight); //调用a页面的autoHeight方法，在该方法中去改变iframe的高度</div><div class="line">}</div></pre></td></tr></table></figure>
+
 <h4 id="2、使用代理页">2、使用代理页</h4>
 <p>如果主域名也不同该怎么做呢？如：a.com/index.html和b.com/iframe.html</p>
 <ul>
@@ -1408,134 +819,14 @@ console.profileEnd();
 <p>  即在b.com下建立一个b.com/proxy.html代理页面，还是以高度自适应为例来说明：</p>
 <p>  a页面iframe该proxy页面，并将高度以hash值的方式填到这个嵌入proxy.html的iframe的src中去<br>  在proxy.html中去拿到这个hash中的高度值，并去操作父父层页面的高度<br>  <img src="/css/images/iframe.png" alt="iframe cross domain"></p>
 <p>  代码如下：</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-</pre></td><td class="code"><pre><span class="comment">#set_height.js</span>
-(function(win, doc){
-	win.onload = <span class="function"><span class="title">function</span></span> () {
-        var url = <span class="string">"http://a.com/proxy.html"</span>;
-       	var ifmProxy = doc.getElementById(<span class="string">"ifmProxy"</span>); //iframe target
-        var hs; //height
-        var hsLastTime = <span class="number">0</span>; //height last time
-        var startTime = <span class="number">0</span>; //count
-        var loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span> () {
-            <span class="keyword">set</span>Height();
-        }, <span class="number">500</span>);
-        function <span class="function"><span class="title">setHeight</span></span>() {
-            startTime++;
-            //get current height
-            hs = doc.documentElement.scrollHeight;
-            //update the hs height
-            <span class="keyword">if</span>(hs !== hsLastTime) {
-            	ifmProxy.src = url + <span class="string">"#"</span> + hs;
-                hsLastTime = hs;
-            }
-            //clearCount and restart
-         	<span class="keyword">if</span>(startTime &gt;= <span class="number">500</span>) {
-         	    clearInterval(loadIframeStart);
-               	startTime = <span class="number">0</span>;
-               	loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span>() {
-                    <span class="keyword">set</span>Height();
-               	}, <span class="number">500</span>)                                                                            
-            }    
-        }
-    };
-})(window, document);
-</pre></td></tr></table></figure><br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-</pre></td><td class="code"><pre><span class="comment">#proxy.html</span>
-&lt;script&gt;
-    try{
-        var ifmAnalyst = parent.parent.document.getElementById(<span class="string">'isvIframeCon'</span>); //目标iframe
-        var hs; //获取的高度
-        var hsLastTime = <span class="number">0</span>; //上一次获取到的高度
-        var startTime = <span class="number">0</span>; //计时器初始值
-        var loadIframeStart = window.setInterval( <span class="function"><span class="title">function</span></span> () {
-            updateHeight();
-        }, <span class="number">500</span>);
-        function <span class="function"><span class="title">updateHeight</span></span>() {
-            startTime++;
-            //获取当前的高度值
-            hs = window.location.hash;
-            //当高度改变则去更新iframe的高度同时将hsLastTime更新
-            <span class="keyword">if</span>(hs !== hsLastTime) {
-                ifmAnalyst.style.height = hs.split(<span class="string">"#"</span>)[<span class="number">1</span>] + <span class="string">"px"</span>;
-                hsLastTime = hs;
-            }
-            //当达到一定的次数，清理一次计时器，并重新开始监听
-            <span class="keyword">if</span>(startTime &gt;= <span class="number">500</span>) {
-                clearInterval(loadIframeStart);
-                startTime = <span class="number">0</span>;
-                loadIframeStart = window.setInterval( <span class="function"><span class="title">function</span></span>() {
-                    updateHeight();
-                }, <span class="number">500</span>)
-            }                                                                                      
-        }
-    } catch(ex) {
-    }
-&lt;/script&gt;
-</pre></td></tr></table></figure>
-
 </li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#set_height.js</span></div><div class="line">(function(win, doc){</div><div class="line">	win.onload = <span class="function"><span class="title">function</span></span> () {</div><div class="line">        var url = <span class="string">"http://a.com/proxy.html"</span>;</div><div class="line">       	var ifmProxy = doc.getElementById(<span class="string">"ifmProxy"</span>); //iframe target</div><div class="line">        var hs; //height</div><div class="line">        var hsLastTime = <span class="number">0</span>; //height last time</div><div class="line">        var startTime = <span class="number">0</span>; //count</div><div class="line">        var loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span> () {</div><div class="line">            <span class="keyword">set</span>Height();</div><div class="line">        }, <span class="number">500</span>);</div><div class="line">        function <span class="function"><span class="title">setHeight</span></span>() {</div><div class="line">            startTime++;</div><div class="line">            //get current height</div><div class="line">            hs = doc.documentElement.scrollHeight;</div><div class="line">            //update the hs height</div><div class="line">            <span class="keyword">if</span>(hs !== hsLastTime) {</div><div class="line">            	ifmProxy.src = url + <span class="string">"#"</span> + hs;</div><div class="line">                hsLastTime = hs;</div><div class="line">            }</div><div class="line">            //clearCount and restart</div><div class="line">         	<span class="keyword">if</span>(startTime &gt;= <span class="number">500</span>) {</div><div class="line">         	    clearInterval(loadIframeStart);</div><div class="line">               	startTime = <span class="number">0</span>;</div><div class="line">               	loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span>() {</div><div class="line">                    <span class="keyword">set</span>Height();</div><div class="line">               	}, <span class="number">500</span>)                                                                            </div><div class="line">            }    </div><div class="line">        }</div><div class="line">    };</div><div class="line">})(window, document);</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#proxy.html</span></div><div class="line">&lt;script&gt;</div><div class="line">    try{</div><div class="line">        var ifmAnalyst = parent.parent.document.getElementById(<span class="string">'isvIframeCon'</span>); //目标iframe</div><div class="line">        var hs; //获取的高度</div><div class="line">        var hsLastTime = <span class="number">0</span>; //上一次获取到的高度</div><div class="line">        var startTime = <span class="number">0</span>; //计时器初始值</div><div class="line">        var loadIframeStart = window.setInterval( <span class="function"><span class="title">function</span></span> () {</div><div class="line">            updateHeight();</div><div class="line">        }, <span class="number">500</span>);</div><div class="line">        function <span class="function"><span class="title">updateHeight</span></span>() {</div><div class="line">            startTime++;</div><div class="line">            //获取当前的高度值</div><div class="line">            hs = window.location.hash;</div><div class="line">            //当高度改变则去更新iframe的高度同时将hsLastTime更新</div><div class="line">            <span class="keyword">if</span>(hs !== hsLastTime) {</div><div class="line">                ifmAnalyst.style.height = hs.split(<span class="string">"#"</span>)[<span class="number">1</span>] + <span class="string">"px"</span>;</div><div class="line">                hsLastTime = hs;</div><div class="line">            }</div><div class="line">            //当达到一定的次数，清理一次计时器，并重新开始监听</div><div class="line">            <span class="keyword">if</span>(startTime &gt;= <span class="number">500</span>) {</div><div class="line">                clearInterval(loadIframeStart);</div><div class="line">                startTime = <span class="number">0</span>;</div><div class="line">                loadIframeStart = window.setInterval( <span class="function"><span class="title">function</span></span>() {</div><div class="line">                    updateHeight();</div><div class="line">                }, <span class="number">500</span>)</div><div class="line">            }                                                                                      </div><div class="line">        }</div><div class="line">    } catch(ex) {</div><div class="line">    }</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+
 <h4 id="3、JSONP（创建script标签形式）">3、JSONP（创建script标签形式）</h4>
 <p>所谓JSONP的方式简单来说就是利用script标签不受同源策略的限制这一特性。</p>
 <p>我们通过script标签的形式把想要请求的地址作为src传入，从而获得相应的文件或者JSON数据。</p>
@@ -1543,123 +834,29 @@ console.profileEnd();
 <p>b.com下的函数function fn(res){ console.log(res.name); }</p>
 <p>下面我们来看下具体来写应该怎样做：</p>
 <ul>
-<li><p>在A.com网站下：</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre>function createJs(sUrl){
-    var oScript = document.createElement(<span class="string">'script'</span>);
-    oScript.type = <span class="string">'text/javascript'</span>;
-    oScript.src = sUrl;
-    document.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(oScript);
-}
-createJs(<span class="string">'jsonp.js?callback=fn'</span>);
-function fn(rs) {
-    console.log(rs);
-}
-</pre></td></tr></table></figure>
-</li>
-<li><p>在B.com的jsonp.js通过拿到这个callback参数，并把它填充到具体的数据中，格式如下</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>fn({<span class="string">"name"</span>, <span class="string">"amo"</span>});
-</pre></td></tr></table></figure>
-
-<p>  这样就相当于页面上是这样的</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>&lt;script&gt;
-	fn({<span class="string">"name"</span>: <span class="string">"amo"</span>});//fn这个函数的调用
-&lt;/script&gt;
-</pre></td></tr></table></figure>
-
-</li>
+<li>在A.com网站下：</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function createJs(sUrl){</div><div class="line">    var oScript = document.createElement(<span class="string">'script'</span>);</div><div class="line">    oScript.type = <span class="string">'text/javascript'</span>;</div><div class="line">    oScript.src = sUrl;</div><div class="line">    document.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(oScript);</div><div class="line">}</div><div class="line">createJs(<span class="string">'jsonp.js?callback=fn'</span>);</div><div class="line">function fn(rs) {</div><div class="line">    console.log(rs);</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<ul>
+<li>在B.com的jsonp.js通过拿到这个callback参数，并把它填充到具体的数据中，格式如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fn({<span class="string">"name"</span>, <span class="string">"amo"</span>});</div></pre></td></tr></table></figure>
+
+
+<pre><code>这样就相当于页面上是这样的
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">	fn({<span class="string">"name"</span>: <span class="string">"amo"</span>});//fn这个函数的调用</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+
 <p>当然这里只是一个思路的过程，实际JSONP的过程要比这复杂的多，比如说是否onload、回调状态码、格式的校验等。</p>
 <h4 id="4、postMessage方式">4、postMessage方式</h4>
 <p>在HTML5中，提出了工作线程的概念（web workers）。Web Workers 允许开发人员编写能够长时间运行而不被用户所中断的后台程序，去执行事务或者逻辑，并同时保证页面对用户的及时响应。web worker一旦被创建，就可以通过postMessage 向任务池发送任务请求，执行完之后再通过 postMessage 返回消息给创建者指定的事件处理程序 ( 通过 onmessage 进行捕获 )。Web Workers 进程能够在不影响用户界面的情况下处理任务，并且，它还可以使用 XMLHttpRequest 来处理 I/O，但通常，后台进程（包括 Web Workers 进程）不能对 DOM 进行操作。如果希望后台程序处理的结果能够改变 DOM，只能通过返回消息给创建者的回调函数进行处理。 </p>
 <p>那么利用这个特性，我们怎么来实现跨域之间的通信呢？还是以高度自适应为例。</p>
 <p>a.com/parent.html 嵌入 b.com/child.html该如何去获取到b下面的页面高度呢？</p>
 <p>在child.html中引入如下代码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-</pre></td><td class="code"><pre>(function(win, doc){
-    win.onload = <span class="function"><span class="title">function</span></span> () {
-        var hs; //height
-        var hsLastTime = <span class="number">0</span>; //height last time
-        var startTime = <span class="number">0</span>; //count
-        var loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span> () {
-            <span class="keyword">set</span>Height();
-        }, <span class="number">500</span>);
-        function <span class="function"><span class="title">setHeight</span></span>() {
-            startTime++;
-            //get current height
-            hs = doc.documentElement.offsetHeight;
-            //update the hs height
-            <span class="keyword">if</span>(hs !== hsLastTime) {
-                window.parent.postMessage({h: hs}, <span class="string">'*'</span>); //指定是向父容器postmessage
-                hsLastTime = hs;
-            }
-            //clearCount and restart
-            <span class="keyword">if</span>(startTime &gt;= <span class="number">500</span>) {
-                clearInterval(loadIframeStart);
-                startTime = <span class="number">0</span>;
-                loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span>() {
-                    <span class="keyword">set</span>Height();
-                }, <span class="number">500</span>)
-            }
-        }
-    };
-})(window, document);
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">(function(win, doc){</div><div class="line">    win.onload = <span class="function"><span class="title">function</span></span> () {</div><div class="line">        var hs; //height</div><div class="line">        var hsLastTime = <span class="number">0</span>; //height last time</div><div class="line">        var startTime = <span class="number">0</span>; //count</div><div class="line">        var loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span> () {</div><div class="line">            <span class="keyword">set</span>Height();</div><div class="line">        }, <span class="number">500</span>);</div><div class="line">        function <span class="function"><span class="title">setHeight</span></span>() {</div><div class="line">            startTime++;</div><div class="line">            //get current height</div><div class="line">            hs = doc.documentElement.offsetHeight;</div><div class="line">            //update the hs height</div><div class="line">            <span class="keyword">if</span>(hs !== hsLastTime) {</div><div class="line">                window.parent.postMessage({h: hs}, <span class="string">'*'</span>); //指定是向父容器postmessage</div><div class="line">                hsLastTime = hs;</div><div class="line">            }</div><div class="line">            //clearCount and restart</div><div class="line">            <span class="keyword">if</span>(startTime &gt;= <span class="number">500</span>) {</div><div class="line">                clearInterval(loadIframeStart);</div><div class="line">                startTime = <span class="number">0</span>;</div><div class="line">                loadIframeStart = win.setInterval( <span class="function"><span class="title">function</span></span>() {</div><div class="line">                    <span class="keyword">set</span>Height();</div><div class="line">                }, <span class="number">500</span>)</div><div class="line">            }</div><div class="line">        }</div><div class="line">    };</div><div class="line">})(window, document);</div></pre></td></tr></table></figure>
 
 <p>在parent.html加载完iframe之后引入如下代码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>window.addEventListener(<span class="string">"message"</span>, function(data) {
-    var ifmAnalyst = document.getElementById(<span class="string">'isvIframeCon'</span>)，//目标iframe
-        ifmHeight = data.data.h;
-    //data.data.h即为高度
-    ifmAnalyst.style.height = ifmHeight + <span class="string">"px"</span>;
-});
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">window.addEventListener(<span class="string">"message"</span>, function(data) {</div><div class="line">    var ifmAnalyst = document.getElementById(<span class="string">'isvIframeCon'</span>)，//目标iframe</div><div class="line">        ifmHeight = data.data.h;</div><div class="line">    //data.data.h即为高度</div><div class="line">    ifmAnalyst.style.height = ifmHeight + <span class="string">"px"</span>;</div><div class="line">});</div></pre></td></tr></table></figure>
 
 <p><strong>这种方法虽然很方便，但是是H5的特性，所以在使用前先考虑是否需要兼容低版本浏览器</strong></p>
 <h4 id="5、服务器代理">5、服务器代理</h4>
@@ -1669,7 +866,7 @@ function fn(rs) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/07/01/cross_domain/" data-id="uy0hc81xr1pzqho8" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/07/01/cross_domain/" data-id="vcnhykck4vtv2zlg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cross-domain/">cross domain</a></li></ul>
@@ -1712,96 +909,84 @@ function fn(rs) {
 </ul>
 <h3 id="3、ssh设置">3、ssh设置</h3>
 <ul>
-<li>如果没有id_rsa.pub，生成key  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>	$ ssh-keygen -t rsa -C <span class="string">"邮件地址@youremail.com"</span>  
-	Generating public/private rsa key pair.  
-
-	Enter file <span class="keyword">in</span> which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;
-</pre></td></tr></table></figure></li>
-<li>设置加密串  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>	Enter passphrase (empty <span class="keyword">for</span> no passphrase):&lt;输入加密串&gt;  
-	Enter same passphrase again:&lt;再次输入加密串&gt;
-</pre></td></tr></table></figure></li>
-<li>有了ssh key之后，添加至github相应的配置中<br>  打开id_rsa.pub拷贝内容，打开github的设置页面添加key粘贴<br>  <img src="/css/images/ssh_key.jpg" alt="GitHub ssh key"></li>
-<li>测试是否成功<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	$ ssh -T git@github.com
-</pre></td></tr></table></figure><br>  如果显示如下：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>	The authenticity of host <span class="string">'github.com (207.97.227.239)'</span> can<span class="string">'t be established.  
-	RSA key fingerprint is   
-	Are you sure you want to continue connecting (yes/no)?</span>
-</pre></td></tr></table></figure><br>  输入yes<br>  然后会看到：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	Hi &lt;em&gt;username&lt;/em&gt;! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span>
-</pre></td></tr></table></figure><br>  至此，已经可以通过ssh连接到github，配置名称和邮箱：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>	$ git config --global user.name <span class="string">"你的名字"</span>  
-	$ git config --global user.email <span class="string">"your_email@youremail.com"</span>
-</pre></td></tr></table></figure><h3 id="4、使用github_pages建立博客">4、使用github pages建立博客</h3>
-  <a href="https://pages.github.com/" target="_blank" rel="external">官网简易教程</a><h3 id="5、hexo构建博客">5、hexo构建博客</h3>
-</li>
-<li>Node和Git都安装好了之后，安装hexo  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	npm install hexo -g
-</pre></td></tr></table></figure></li>
-<li>初始化hexo到指定目录  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>	mkdir blog
-	hexo init blog
-	<span class="built_in">cd</span> blog
-	npm install
-</pre></td></tr></table></figure></li>
-<li>生成静态页面<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	hexo generate
-</pre></td></tr></table></figure><br>  当修改文章tag或内容，不能正确重新生成内容，可以删除hexo/db.json然后重试，不行就去public下删除对应文件重新生成。</li>
-<li>本地启动服务<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	hexo server
-</pre></td></tr></table></figure><br>  当修改文章tag或内容，不能正确重新生成内容，可以删除hexo/db.json然后重试，不行就去public下删除对应文件重新生成。</li>
-<li>写文章  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	hexo new [layout] <span class="string">"new blog"</span>
-</pre></td></tr></table></figure><br>  layout的默认值是scaffolds/post.md文件，看下该文件：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>	title: <span class="comment">#文章页面上的显示名称，可修改</span>
-	date: <span class="comment">#文章生成时间</span>
-	categories: <span class="comment">#文章分类</span>
-	tags: <span class="comment">#文章标签，可空，多标签请用[tag1,tag2]</span>
-	---
-	这里开始使用markdown格式输入正文
-</pre></td></tr></table></figure></li>
-<li>当有任何修改时，只需直接刷新浏览器就可本地预览。<h3 id="6、hexo和github的关联">6、hexo和github的关联</h3>
-  打开hexo目录下的_config.yml文件，修改deploy部分：  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>	deploy:  
-		<span class="built_in">type</span>: github
-		repo: 对应githubio的地址，建议用https的仓库地址
-		branch: master
-		message: update
-</pre></td></tr></table></figure><br>  配置完之后，每当要发布时只需执行便会自动push到github io的仓库上<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	hexo generate
-</pre></td></tr></table></figure><br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	hexo deploy
-</pre></td></tr></table></figure>
-
-</li>
+<li>如果没有id_rsa.pub，生成key</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"邮件地址@youremail.com"</span>  </div><div class="line">Generating public/private rsa key pair.  </div><div class="line"></div><div class="line">Enter file <span class="keyword">in</span> which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;</div></pre></td></tr></table></figure>
+
+<ul>
+<li>设置加密串</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):&lt;输入加密串&gt;  </div><div class="line">Enter same passphrase again:&lt;再次输入加密串&gt;</div></pre></td></tr></table></figure>
+
+<ul>
+<li>有了ssh key之后，添加至github相应的配置中<br>  打开id_rsa.pub拷贝内容，打开github的设置页面添加key粘贴<br>  <img src="/css/images/ssh_key.jpg" alt="GitHub ssh key"></li>
+<li>测试是否成功</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div></pre></td></tr></table></figure>
+
+<pre><code>如果显示如下：
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">The authenticity of host <span class="string">'github.com (207.97.227.239)'</span> can<span class="string">'t be established.  </span></div><div class="line">RSA key fingerprint is   </div><div class="line">Are you sure you want to continue connecting (yes/no)?</div></pre></td></tr></table></figure>
+
+
+<pre><code>输入<span class="literal">yes</span>
+然后会看到：
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hi &lt;em&gt;username&lt;/em&gt;! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></div></pre></td></tr></table></figure>
+
+<pre><code>至此，已经可以通过ssh连接到github，配置名称和邮箱：
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"你的名字"</span>  </div><div class="line">$ git config --global user.email <span class="string">"your_email@youremail.com"</span></div></pre></td></tr></table></figure>
+
+<h3 id="4、使用github_pages建立博客">4、使用github pages建立博客</h3>
+<pre><code>[<span class="link_label">官网简易教程</span>](<span class="link_url">https://pages.github.com/</span>)
+</code></pre><h3 id="5、hexo构建博客">5、hexo构建博客</h3>
+<ul>
+<li>Node和Git都安装好了之后，安装hexo</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo -g</div></pre></td></tr></table></figure>
+
+<ul>
+<li>初始化hexo到指定目录</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mkdir blog</div><div class="line">hexo init blog</div><div class="line"><span class="built_in">cd</span> blog</div><div class="line">npm install</div></pre></td></tr></table></figure>
+
+<ul>
+<li>生成静态页面</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate</div></pre></td></tr></table></figure>
+
+<pre><code>当修改文章tag或内容，不能正确重新生成内容，可以删除hexo/<span class="pseudo">db</span>.json然后重试，不行就去<span class="preprocessor">public</span>下删除对应文件重新生成。
+</code></pre><ul>
+<li>本地启动服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure>
+
+<pre><code>当修改文章tag或内容，不能正确重新生成内容，可以删除hexo/<span class="pseudo">db</span>.json然后重试，不行就去<span class="preprocessor">public</span>下删除对应文件重新生成。
+</code></pre><ul>
+<li>写文章</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new [layout] <span class="string">"new blog"</span></div></pre></td></tr></table></figure>
+
+<pre><code><span class="keyword">layout</span>的默认值是scaffolds/post.md文件，看下该文件：
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">title: <span class="comment">#文章页面上的显示名称，可修改</span></div><div class="line">date: <span class="comment">#文章生成时间</span></div><div class="line">categories: <span class="comment">#文章分类</span></div><div class="line">tags: <span class="comment">#文章标签，可空，多标签请用[tag1,tag2]</span></div><div class="line">---</div><div class="line">这里开始使用markdown格式输入正文</div></pre></td></tr></table></figure>
+
+<ul>
+<li>当有任何修改时，只需直接刷新浏览器就可本地预览。<h3 id="6、hexo和github的关联">6、hexo和github的关联</h3>
+  打开hexo目录下的_config.yml文件，修改deploy部分：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:  </div><div class="line">	<span class="built_in">type</span>: github</div><div class="line">	repo: 对应githubio的地址，建议用https的仓库地址</div><div class="line">	branch: master</div><div class="line">	message: update</div></pre></td></tr></table></figure>
+
+<pre><code>配置完之后，每当要发布时只需执行便会自动push到github <span class="built_in">io</span>的仓库上
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure>
+
 <p><strong>如果想要了解更多，可访问  <a href="http://hexo.io/" target="_blank" rel="external">hexo官方文档</a></strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="v45sgidee3feba9y" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="xyeljmm0tz5yv970" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1820,7 +1005,7 @@ function fn(rs) {
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1829,7 +1014,7 @@ function fn(rs) {
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less-css/">less css</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less-css/">less css</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1838,7 +1023,7 @@ function fn(rs) {
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/cross-domain/" style="font-size: NaNpx;">cross domain</a><a href="/tags/css/" style="font-size: NaNpx;">css</a><a href="/tags/less-css/" style="font-size: NaNpx;">less css</a>
+      <a href="/tags/cross-domain/" style="font-size: 10.00px;">cross domain</a><a href="/tags/css/" style="font-size: 20.00px;">css</a><a href="/tags/less-css/" style="font-size: 10.00px;">less css</a>
     </div>
   </div>
 
@@ -1847,7 +1032,7 @@ function fn(rs) {
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1857,6 +1042,10 @@ function fn(rs) {
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/11/12/clip/">clip用法</a>
+          </li>
         
           <li>
             <a href="/2014/08/06/css_selector/">css选择器</a>
@@ -1872,10 +1061,6 @@ function fn(rs) {
         
           <li>
             <a href="/2014/07/04/console/">console使用小技巧</a>
-          </li>
-        
-          <li>
-            <a href="/2014/07/01/cross_domain/">跨域问题及解决方案</a>
           </li>
         
       </ul>
@@ -1912,7 +1097,8 @@ function fn(rs) {
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script type="text/javascript" src="/js/script.js"></script>
+<script src="/js/script.js" type="text/javascript"></script>
+
   </div>
 </body>
 </html>

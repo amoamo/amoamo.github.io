@@ -14,14 +14,9 @@ git
 
 3、ssh设置
 
-如果没有id_rsa.pub，生成key  1
-2
-3
-4
-	$ ssh-keygen -t rsa -C "邮件地址@youremail.com"  
-	Generating public/private rsa key pair.  
+如果没有id_rsa.pub，生成key
 
-	Enter file in which to save the k">
+1234$ ssh-keygen -t rsa -C '邮件地址@youremail.com'  Generating public/private rsa key pair.  Enter file in which to save the key (/Users">
 <meta property="og:type" content="article">
 <meta property="og:title" content="github pages & hexo建站指南">
 <meta property="og:url" content="http://amoamo.github.io/2014/06/18/hexo/">
@@ -35,14 +30,9 @@ git
 
 3、ssh设置
 
-如果没有id_rsa.pub，生成key  1
-2
-3
-4
-	$ ssh-keygen -t rsa -C "邮件地址@youremail.com"  
-	Generating public/private rsa key pair.  
+如果没有id_rsa.pub，生成key
 
-	Enter file in which to save the k">
+1234$ ssh-keygen -t rsa -C '邮件地址@youremail.com'  Generating public/private rsa key pair.  Enter file in which to save the key (/Users">
 <meta property="og:image" content="/css/images/ssh_key.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="github pages & hexo建站指南">
@@ -55,14 +45,10 @@ git
 
 3、ssh设置
 
-如果没有id_rsa.pub，生成key  1
-2
-3
-4
-	$ ssh-keygen -t rsa -C "邮件地址@youremail.com"  
-	Generating public/private rsa key pair.  
+如果没有id_rsa.pub，生成key
 
-	Enter file in which to save the k">
+1234$ ssh-keygen -t rsa -C '邮件地址@youremail.com'  Generating public/private rsa key pair.  Enter file in which to save the key (/Users">
+
   
     <link rel="alternative" href="/atom.xml" title="Do la a mo" type="application/atom+xml">
   
@@ -70,6 +56,7 @@ git
     <link rel="icon" href="/favicon.png">
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
+
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
 </head>
@@ -94,7 +81,8 @@ git
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-          <a class="main-nav-link" href="/games/flappybird.html" target="_blank">Game</a>
+          <a class="main-nav-link" href="/www/games/flappybird.html" target="_blank">Game</a>
+          <a class="main-nav-link" href="/www/demo/index.html" target="_blank">Demo</a>
       </nav>
       <nav id="sub-nav">
         
@@ -108,6 +96,7 @@ git
     </div>
   </div>
 </header>
+
       <div class="outer">
         <section id="main"><article id="post-hexo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -140,96 +129,84 @@ git
 </ul>
 <h3 id="3、ssh设置">3、ssh设置</h3>
 <ul>
-<li>如果没有id_rsa.pub，生成key  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>	$ ssh-keygen -t rsa -C <span class="string">"邮件地址@youremail.com"</span>  
-	Generating public/private rsa key pair.  
-
-	Enter file <span class="keyword">in</span> which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;
-</pre></td></tr></table></figure></li>
-<li>设置加密串  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>	Enter passphrase (empty <span class="keyword">for</span> no passphrase):&lt;输入加密串&gt;  
-	Enter same passphrase again:&lt;再次输入加密串&gt;
-</pre></td></tr></table></figure></li>
-<li>有了ssh key之后，添加至github相应的配置中<br>  打开id_rsa.pub拷贝内容，打开github的设置页面添加key粘贴<br>  <img src="/css/images/ssh_key.jpg" alt="GitHub ssh key"></li>
-<li>测试是否成功<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	$ ssh -T git@github.com
-</pre></td></tr></table></figure><br>  如果显示如下：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>	The authenticity of host <span class="string">'github.com (207.97.227.239)'</span> can<span class="string">'t be established.  
-	RSA key fingerprint is   
-	Are you sure you want to continue connecting (yes/no)?</span>
-</pre></td></tr></table></figure><br>  输入yes<br>  然后会看到：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	Hi &lt;em&gt;username&lt;/em&gt;! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span>
-</pre></td></tr></table></figure><br>  至此，已经可以通过ssh连接到github，配置名称和邮箱：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>	$ git config --global user.name <span class="string">"你的名字"</span>  
-	$ git config --global user.email <span class="string">"your_email@youremail.com"</span>
-</pre></td></tr></table></figure><h3 id="4、使用github_pages建立博客">4、使用github pages建立博客</h3>
-  <a href="https://pages.github.com/" target="_blank" rel="external">官网简易教程</a><h3 id="5、hexo构建博客">5、hexo构建博客</h3>
-</li>
-<li>Node和Git都安装好了之后，安装hexo  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	npm install hexo -g
-</pre></td></tr></table></figure></li>
-<li>初始化hexo到指定目录  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>	mkdir blog
-	hexo init blog
-	<span class="built_in">cd</span> blog
-	npm install
-</pre></td></tr></table></figure></li>
-<li>生成静态页面<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	hexo generate
-</pre></td></tr></table></figure><br>  当修改文章tag或内容，不能正确重新生成内容，可以删除hexo/db.json然后重试，不行就去public下删除对应文件重新生成。</li>
-<li>本地启动服务<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	hexo server
-</pre></td></tr></table></figure><br>  当修改文章tag或内容，不能正确重新生成内容，可以删除hexo/db.json然后重试，不行就去public下删除对应文件重新生成。</li>
-<li>写文章  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	hexo new [layout] <span class="string">"new blog"</span>
-</pre></td></tr></table></figure><br>  layout的默认值是scaffolds/post.md文件，看下该文件：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>	title: <span class="comment">#文章页面上的显示名称，可修改</span>
-	date: <span class="comment">#文章生成时间</span>
-	categories: <span class="comment">#文章分类</span>
-	tags: <span class="comment">#文章标签，可空，多标签请用[tag1,tag2]</span>
-	---
-	这里开始使用markdown格式输入正文
-</pre></td></tr></table></figure></li>
-<li>当有任何修改时，只需直接刷新浏览器就可本地预览。<h3 id="6、hexo和github的关联">6、hexo和github的关联</h3>
-  打开hexo目录下的_config.yml文件，修改deploy部分：  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>	deploy:  
-		<span class="built_in">type</span>: github
-		repo: 对应githubio的地址，建议用https的仓库地址
-		branch: master
-		message: update
-</pre></td></tr></table></figure><br>  配置完之后，每当要发布时只需执行便会自动push到github io的仓库上<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	hexo generate
-</pre></td></tr></table></figure><br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>	hexo deploy
-</pre></td></tr></table></figure>
-
-</li>
+<li>如果没有id_rsa.pub，生成key</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"邮件地址@youremail.com"</span>  </div><div class="line">Generating public/private rsa key pair.  </div><div class="line"></div><div class="line">Enter file <span class="keyword">in</span> which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;</div></pre></td></tr></table></figure>
+
+<ul>
+<li>设置加密串</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):&lt;输入加密串&gt;  </div><div class="line">Enter same passphrase again:&lt;再次输入加密串&gt;</div></pre></td></tr></table></figure>
+
+<ul>
+<li>有了ssh key之后，添加至github相应的配置中<br>  打开id_rsa.pub拷贝内容，打开github的设置页面添加key粘贴<br>  <img src="/css/images/ssh_key.jpg" alt="GitHub ssh key"></li>
+<li>测试是否成功</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div></pre></td></tr></table></figure>
+
+<pre><code>如果显示如下：
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">The authenticity of host <span class="string">'github.com (207.97.227.239)'</span> can<span class="string">'t be established.  </span></div><div class="line">RSA key fingerprint is   </div><div class="line">Are you sure you want to continue connecting (yes/no)?</div></pre></td></tr></table></figure>
+
+
+<pre><code>输入<span class="literal">yes</span>
+然后会看到：
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hi &lt;em&gt;username&lt;/em&gt;! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></div></pre></td></tr></table></figure>
+
+<pre><code>至此，已经可以通过ssh连接到github，配置名称和邮箱：
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"你的名字"</span>  </div><div class="line">$ git config --global user.email <span class="string">"your_email@youremail.com"</span></div></pre></td></tr></table></figure>
+
+<h3 id="4、使用github_pages建立博客">4、使用github pages建立博客</h3>
+<pre><code>[<span class="link_label">官网简易教程</span>](<span class="link_url">https://pages.github.com/</span>)
+</code></pre><h3 id="5、hexo构建博客">5、hexo构建博客</h3>
+<ul>
+<li>Node和Git都安装好了之后，安装hexo</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo -g</div></pre></td></tr></table></figure>
+
+<ul>
+<li>初始化hexo到指定目录</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mkdir blog</div><div class="line">hexo init blog</div><div class="line"><span class="built_in">cd</span> blog</div><div class="line">npm install</div></pre></td></tr></table></figure>
+
+<ul>
+<li>生成静态页面</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate</div></pre></td></tr></table></figure>
+
+<pre><code>当修改文章tag或内容，不能正确重新生成内容，可以删除hexo/<span class="pseudo">db</span>.json然后重试，不行就去<span class="preprocessor">public</span>下删除对应文件重新生成。
+</code></pre><ul>
+<li>本地启动服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure>
+
+<pre><code>当修改文章tag或内容，不能正确重新生成内容，可以删除hexo/<span class="pseudo">db</span>.json然后重试，不行就去<span class="preprocessor">public</span>下删除对应文件重新生成。
+</code></pre><ul>
+<li>写文章</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new [layout] <span class="string">"new blog"</span></div></pre></td></tr></table></figure>
+
+<pre><code><span class="keyword">layout</span>的默认值是scaffolds/post.md文件，看下该文件：
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">title: <span class="comment">#文章页面上的显示名称，可修改</span></div><div class="line">date: <span class="comment">#文章生成时间</span></div><div class="line">categories: <span class="comment">#文章分类</span></div><div class="line">tags: <span class="comment">#文章标签，可空，多标签请用[tag1,tag2]</span></div><div class="line">---</div><div class="line">这里开始使用markdown格式输入正文</div></pre></td></tr></table></figure>
+
+<ul>
+<li>当有任何修改时，只需直接刷新浏览器就可本地预览。<h3 id="6、hexo和github的关联">6、hexo和github的关联</h3>
+  打开hexo目录下的_config.yml文件，修改deploy部分：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:  </div><div class="line">	<span class="built_in">type</span>: github</div><div class="line">	repo: 对应githubio的地址，建议用https的仓库地址</div><div class="line">	branch: master</div><div class="line">	message: update</div></pre></td></tr></table></figure>
+
+<pre><code>配置完之后，每当要发布时只需执行便会自动push到github <span class="built_in">io</span>的仓库上
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure>
+
 <p><strong>如果想要了解更多，可访问  <a href="http://hexo.io/" target="_blank" rel="external">hexo官方文档</a></strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="v45sgidee3feba9y" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/06/18/hexo/" data-id="xyeljmm0tz5yv970" class="article-share-link">Share</a>
       
       
     </footer>
@@ -261,7 +238,7 @@ git
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -270,7 +247,7 @@ git
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less-css/">less css</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less-css/">less css</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -279,7 +256,7 @@ git
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/cross-domain/" style="font-size: NaNpx;">cross domain</a><a href="/tags/css/" style="font-size: NaNpx;">css</a><a href="/tags/less-css/" style="font-size: NaNpx;">less css</a>
+      <a href="/tags/cross-domain/" style="font-size: 10.00px;">cross domain</a><a href="/tags/css/" style="font-size: 20.00px;">css</a><a href="/tags/less-css/" style="font-size: 10.00px;">less css</a>
     </div>
   </div>
 
@@ -288,7 +265,7 @@ git
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -298,6 +275,10 @@ git
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/11/12/clip/">clip用法</a>
+          </li>
         
           <li>
             <a href="/2014/08/06/css_selector/">css选择器</a>
@@ -313,10 +294,6 @@ git
         
           <li>
             <a href="/2014/07/04/console/">console使用小技巧</a>
-          </li>
-        
-          <li>
-            <a href="/2014/07/01/cross_domain/">跨域问题及解决方案</a>
           </li>
         
       </ul>
@@ -353,7 +330,8 @@ git
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script type="text/javascript" src="/js/script.js"></script>
+<script src="/js/script.js" type="text/javascript"></script>
+
   </div>
 </body>
 </html>

@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片剪裁预览</title>
+    <style type="text/css">
+        body, div, h2 {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: 12px;
+            font-family: "微软雅黑";
+        }
+        .demo-clip {
+            width: 990px;
+            margin: 20px auto;
+        }
+        .demo-clip .clip-original {
+            position: relative;
+            background: #000;
+            width: 320px;
+            height: 320px;
+            overflow: hidden;
+            float: left;
+        }
+        .demo-clip .clip-pic {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 320px;
+            height: 320px;
+            background-image: url(logo.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        .demo-clip .clip-back-pic {
+            opacity: 0.5;
+            filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50); 
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+        }
+        .demo-clip .clip-front-pic{
+            clip: rect(0 150px 150px 0);
+        }
+        .demo-clip .clip-box {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 150px;
+            height: 150px;
+            border: 1px dashed #fff;
+            margin-top: -1px;
+            margin-left: -1px;
+            cursor: move;
+        }
+        .demo-clip .clip-box span {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+        }
+        .demo-clip .clip-box-lt {
+            top: -4px;
+            left: -4px;
+            cursor:nw-resize;
+        }
+        .demo-clip .clip-box-rt {
+            top: -4px;
+            right: -4px;
+            cursor:ne-resize;
+        }
+        .demo-clip .clip-box-rb {
+            bottom: -4px;
+            right: -4px;
+            cursor:se-resize;
+        }
+        .demo-clip .clip-box-lb {
+            bottom: -4px;
+            left: -4px;
+            cursor:sw-resize;
+        }
+        .demo-clip .clip-preview {
+            position: relative;
+            margin-left: 20px;
+            width: 100px;
+            height: 100px;
+            float: left;
+            overflow: hidden;
+        }
+        .demo-clip .clip-preview-img {
+            position: absolute;
+        }
+        .clearfix:before, .clearfix:after {
+            content: "";
+            display: table;
+        }
+        .clearfix:after {
+            clear: both;
+        }
+        .clearfix {
+            *zoom: 1;
+        }
+    </style>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="draggable.js"></script>
+</head>
+<body>
+    <div class="demo-clip clearfix">
+        <div class="clip-original">
+            <div class="clip-pic clip-back-pic"></div>
+            <div class="clip-pic clip-front-pic"></div>
+            <div class="clip-box">
+                <span class="clip-box-drag clip-box-lt" data-rel="lt"></span>
+                <span class="clip-box-drag clip-box-rt" data-rel="rt"></span>
+                <span class="clip-box-drag clip-box-rb" data-rel="rb"></span>
+                <span class="clip-box-drag clip-box-lb" data-rel="lb"></span>
+            </div>
+        </div>
+        <div class="clip-preview">
+            <img src="logo.jpg" class="clip-preview-img" />
+        </div>
+    </div>	
+    <script type="text/javascript" src="clip.js"></script>
+</body>
+</html>

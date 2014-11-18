@@ -14,10 +14,13 @@ id选择器    #id-name {}
 子选择器    ul &lt; li {}
 后代选择器  ul li {}
 通配符选择器 * {}
-属性选择器    1
-h1[class] { //所有带有class属性的h1}
-  1
-[foo^">
+属性选择器  
+
+1h1[class] { //所有带有class属性的h1}
+
+
+
+1[foo^=">
 <meta property="og:type" content="article">
 <meta property="og:title" content="css选择器">
 <meta property="og:url" content="http://amoamo.github.io/2014/08/06/css_selector/">
@@ -31,10 +34,13 @@ id选择器    #id-name {}
 子选择器    ul &lt; li {}
 后代选择器  ul li {}
 通配符选择器 * {}
-属性选择器    1
-h1[class] { //所有带有class属性的h1}
-  1
-[foo^">
+属性选择器  
+
+1h1[class] { //所有带有class属性的h1}
+
+
+
+1[foo^=">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css选择器">
 <meta name="twitter:description" content="css选择器分类
@@ -46,10 +52,14 @@ id选择器    #id-name {}
 子选择器    ul &lt; li {}
 后代选择器  ul li {}
 通配符选择器 * {}
-属性选择器    1
-h1[class] { //所有带有class属性的h1}
-  1
-[foo^">
+属性选择器  
+
+1h1[class] { //所有带有class属性的h1}
+
+
+
+1[foo^=">
+
   
     <link rel="alternative" href="/atom.xml" title="Do la a mo" type="application/atom+xml">
   
@@ -57,6 +67,7 @@ h1[class] { //所有带有class属性的h1}
     <link rel="icon" href="/favicon.png">
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
+
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
 </head>
@@ -81,7 +92,8 @@ h1[class] { //所有带有class属性的h1}
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-          <a class="main-nav-link" href="/games/flappybird.html" target="_blank">Game</a>
+          <a class="main-nav-link" href="/www/games/flappybird.html" target="_blank">Game</a>
+          <a class="main-nav-link" href="/www/demo/index.html" target="_blank">Demo</a>
       </nav>
       <nav id="sub-nav">
         
@@ -95,6 +107,7 @@ h1[class] { //所有带有class属性的h1}
     </div>
   </div>
 </header>
+
       <div class="outer">
         <section id="main"><article id="post-css_selector" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -131,17 +144,26 @@ h1[class] { //所有带有class属性的h1}
 <li>子选择器    ul &lt; li {}</li>
 <li>后代选择器  ul li {}</li>
 <li>通配符选择器 * {}</li>
-<li>属性选择器    <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>h1[<span class="class"><span class="keyword">class</span>] {</span> <span class="comment">//所有带有class属性的h1}</span>
-</pre></td></tr></table></figure><br>  <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>[foo^=<span class="string">'bar'</span>] foo属性以<span class="string">'bar'</span>开头的所有元素
-</pre></td></tr></table></figure><br>  <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>[foo<span class="variable">$=</span><span class="string">'bar'</span>] foo属性以<span class="string">'bar'</span>结尾的所有元素
-</pre></td></tr></table></figure><br>  <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>[foo*=<span class="string">'bar'</span>] foo属性包含<span class="string">'bar'</span>的所有元素
-</pre></td></tr></table></figure><br>  <strong>一般有一种场景：比如想对包含某个网站链接的a标签应用某种特殊样式</strong><br>  <figure class="highlight css"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">a</span><span class="attr_selector">[href*='taobao.com']</span> <span class="rules">{<span class="rule">}</span></span>
-</pre></td></tr></table></figure></li>
+<li>属性选择器  </li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">h1[<span class="class"><span class="keyword">class</span>] </span>{ <span class="comment">//所有带有class属性的h1}</span></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[foo^=<span class="string">'bar'</span>] foo属性以<span class="string">'bar'</span>开头的所有元素</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[foo<span class="variable">$=</span><span class="string">'bar'</span>] foo属性以<span class="string">'bar'</span>结尾的所有元素</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[foo*=<span class="string">'bar'</span>] foo属性包含<span class="string">'bar'</span>的所有元素</div></pre></td></tr></table></figure>
+
+<pre><code><span class="keyword">*</span><span class="keyword">*</span>一般有一种场景：比如想对包含某个网站链接的a标签应用某种特殊样式<span class="keyword">*</span><span class="keyword">*</span>
+</code></pre><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">a</span><span class="attr_selector">[href*='taobao.com']</span> <span class="rules">{<span class="rule">}</span></span></div></pre></td></tr></table></figure>
+
+<ul>
 <li>伪类选择器/伪元素选择器<ul>
 <li>伪类：a:link {}    a:hover {} <strong>一般建议申明的顺序为：link visited focus hover active</strong></li>
 <li>伪元素：a:after {}  a:before {} </li>
@@ -156,38 +178,30 @@ h1[class] { //所有带有class属性的h1}
 <li>id选择器：0,1,0,0</li>
 </ul>
 <p>当我们在使用规则时，计算权重，就是把各选择器的权值加到一起如：</p>
-<p><figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>h1 {} // 0001
-h1 a {} //0002
-h1 a.node {} //0012
-#node {} //0100
-div#sidebar *[href] {} //0111
-</pre></td></tr></table></figure><br>计算出了权值，怎么来比较呢？需要注意的是，这个权值是从左到右按位进行比较的，1000大于任何0xxx，01xx大于任何00xx，以此类推。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">h1 {} // 0001</div><div class="line">h1 a {} //0002</div><div class="line">h1 a.node {} //0012</div><div class="line">#node {} //0100</div><div class="line">div#sidebar *[href] {} //0111</div></pre></td></tr></table></figure>
+
+<p>计算出了权值，怎么来比较呢？需要注意的是，这个权值是从左到右按位进行比较的，1000大于任何0xxx，01xx大于任何00xx，以此类推。</p>
 <p>简单来说，样式优先级可以总结为：<br>important&gt;内联&gt;id&gt;class&gt;标签/伪类/属性选择&gt;伪元素&gt;通配符&gt;继承</p>
 <p><strong>但是实际编码中，样式的优先级还跟样式定义的顺序有关系，在样式的定义时不仅需要注意优先级也需要关注尽量减少css的重复定义和代码冗余</strong></p>
 <h3 id="css选择器执行效率">css选择器执行效率</h3>
 <p>首先应该了解，对于<strong>h1 a {}</strong>这样的样式，系统是怎么处理的呢？系统对样式选择器的匹配顺序是从右到左的，也就是会先找到所有的a标签，然后继续向左匹配，查找父辈元素中是否有h1元素，如果都能匹配到，则找到。</p>
 <p>那么怎么编写简洁高效的css呢？有几条很简单的原则</p>
 <ul>
-<li>不要在id选择器前再加其他的选择器，因为id本身是唯一的  <figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>//bad： div#id-name {}
-#id-name {}
-</pre></td></tr></table></figure></li>
-<li>不要在class选择器前再加标签选择器   <figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>//bad: div.class-name {}
-.class-name {}
-</pre></td></tr></table></figure></li>
-<li>尽量在dom中增加class的方式来标记而不是通过属性选择或者层级的方式来定义样式  <figure class="highlight css"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>//bad: a img[src="xxx"] {}
-.xx-img {}
-</pre></td></tr></table></figure></li>
+<li>不要在id选择器前再加其他的选择器，因为id本身是唯一的</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//bad： div#id-name {}</div><div class="line">#id-name {}</div></pre></td></tr></table></figure>
+
+<ul>
+<li>不要在class选择器前再加标签选择器 </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//bad: div.class-name {}</div><div class="line">.class-name {}</div></pre></td></tr></table></figure>
+
+<ul>
+<li>尽量在dom中增加class的方式来标记而不是通过属性选择或者层级的方式来定义样式</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//bad: a img[src="xxx"] {}</div><div class="line">.xx-img {}</div></pre></td></tr></table></figure>
+
+<ul>
 <li>尽量少定义层级关系，因为这会增加查找开销</li>
 </ul>
 <p><strong>记住一点，如果直接可以定位到的元素，不要增加不必要的层级或者限制条件</strong></p>
@@ -195,7 +209,7 @@ div#sidebar *[href] {} //0111
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://amoamo.github.io/2014/08/06/css_selector/" data-id="1ht7cqlbtuij3nom" class="article-share-link">Share</a>
+      <a data-url="http://amoamo.github.io/2014/08/06/css_selector/" data-id="6zfm04vd8z1l9226" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
@@ -205,6 +219,15 @@ div#sidebar *[href] {} //0111
   
     
 <nav id="article-nav">
+  
+    <a href="/2014/11/12/clip/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          clip用法
+        
+      </div>
+    </a>
   
   
     <a href="/2014/07/16/skills/" id="article-nav-older" class="article-nav-link-wrap">
@@ -225,7 +248,7 @@ div#sidebar *[href] {} //0111
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -234,7 +257,7 @@ div#sidebar *[href] {} //0111
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less-css/">less css</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross domain</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less-css/">less css</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -243,7 +266,7 @@ div#sidebar *[href] {} //0111
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/cross-domain/" style="font-size: NaNpx;">cross domain</a><a href="/tags/css/" style="font-size: NaNpx;">css</a><a href="/tags/less-css/" style="font-size: NaNpx;">less css</a>
+      <a href="/tags/cross-domain/" style="font-size: 10.00px;">cross domain</a><a href="/tags/css/" style="font-size: 20.00px;">css</a><a href="/tags/less-css/" style="font-size: 10.00px;">less css</a>
     </div>
   </div>
 
@@ -252,7 +275,7 @@ div#sidebar *[href] {} //0111
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">June 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -262,6 +285,10 @@ div#sidebar *[href] {} //0111
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/11/12/clip/">clip用法</a>
+          </li>
         
           <li>
             <a href="/2014/08/06/css_selector/">css选择器</a>
@@ -277,10 +304,6 @@ div#sidebar *[href] {} //0111
         
           <li>
             <a href="/2014/07/04/console/">console使用小技巧</a>
-          </li>
-        
-          <li>
-            <a href="/2014/07/01/cross_domain/">跨域问题及解决方案</a>
           </li>
         
       </ul>
@@ -317,7 +340,8 @@ div#sidebar *[href] {} //0111
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script type="text/javascript" src="/js/script.js"></script>
+<script src="/js/script.js" type="text/javascript"></script>
+
   </div>
 </body>
 </html>
