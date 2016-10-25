@@ -1,0 +1,77 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta charset="utf-8">
+    <title>I'am Programmer.</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif';
+            background: #000000;
+            color: #02db2d;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        body p {
+            line-height: 25px;
+            font-size: 15px;
+        }
+        #fxxk {
+            display: none;
+        }
+        #fxxk p {
+            display: block;
+            text-align: center;
+            padding: 20px 0;
+            margin: 0;
+            line-height: 100px;
+            font-size: 100px;
+        }
+    </style>
+</head>
+<body>
+<p id="text"></p>
+<div id="fxxk">
+    <p>亮</p>
+    <p>瞎</p>
+    <p>狗</p>
+    <p>眼</p>
+</div>
+<script>
+    var text = document.getElementById('text');
+    var str = '今天是程序猿节, 在这里我要多说几句, 虽然我们程序员已经足够低调了, 但还是会被其它人误解, 认为我们赚钱多不干事还老欺负我们老实当接盘侠, 甚至抢几个月饼也要把我们开除, 不过其实我们是可以毁灭世界滴, 说到这里你可能不相信, 没关系, 那么就首先从毁灭你的眼睛开始好了=。=...';
+    var count = 0;
+
+    var timer = 0;
+    (function typing() {
+        timer = setTimeout(function () {
+            text.innerHTML = str.substr(0, count);
+            if (count++ < str.length) {
+                typing();
+            } else {
+                document.getElementById('text').style.display = 'none';
+                document.getElementById('fxxk').style.display = 'block';
+                fxxk();
+            }
+        }, 120);
+    })();
+
+    var flag = true;
+    var body = document.body;
+    var slogan = document.getElementById('fxxk');
+
+    function fxxk() {
+        setTimeout(function() {
+            flag = !flag;
+            body.style.background = flag ? '#fff' : '#000';
+            slogan.style.color = flag ? '#000' : '#fff';
+            fxxk();
+        }, 50);
+    }
+</script>
+</body>
+</html>
